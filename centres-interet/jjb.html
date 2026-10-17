@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arts Martiaux &amp; JJB — Anis Nefikha</title>
+  <meta name="description" content="Pratique assidue du Jiu-Jitsu Brésilien : une discipline axée sur la stratégie, la rigueur et le dépassement de soi. Centre d&#x27;intérêt d&#x27;Anis Nefikha.">
+  <meta name="theme-color" content="#0A0F18">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Arts Martiaux &amp; JJB — Anis Nefikha">
+  <meta property="og:description" content="Pratique assidue du Jiu-Jitsu Brésilien : une discipline axée sur la stratégie, la rigueur et le dépassement de soi. Centre d&#x27;intérêt d&#x27;Anis Nefikha.">
+  <meta property="og:type" content="article">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0F18'/%3E%3Ctext x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='28' fill='%23FF5A36'%3EAN%3C/text%3E%3C/svg%3E">
+
+  <!-- Polices Google : uniquement les graisses utilisées, font-display: swap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Space+Grotesk:wght@600&display=swap">
+
+  <link rel="stylesheet" href="../css/01-tokens.css">
+  <link rel="stylesheet" href="../css/02-base.css">
+  <link rel="stylesheet" href="../css/03-layout.css">
+  <link rel="stylesheet" href="../css/04-components.css">
+
+  <!-- Apparitions au défilement : masque les blocs [data-reveal] avant le premier affichage.
+       Mouvement réduit demandé, ou main.js indisponible : rien n'est masqué. -->
+  <script>
+    (function (root) {
+      if (!window.matchMedia || !matchMedia('(prefers-reduced-motion: no-preference)').matches || !('IntersectionObserver' in window)) return;
+      root.classList.add('reveal-on');
+      setTimeout(function () {
+        if (!root.classList.contains('reveal-ready')) root.classList.remove('reveal-on');
+      }, 2500);
+    })(document.documentElement);
+  </script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body>
+
+  <!-- Icônes (sprite SVG décoratif, réutilisé avec <use>) -->
+  <svg class="icon-sprite" aria-hidden="true" hidden>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.5"/><path d="M4.5 5.5v13c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5v-13M4.5 12c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5"/></symbol>
+    <symbol id="i-table" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M3.5 9.5h17M3.5 14.5h17M9.5 9.5v10"/></symbol>
+    <symbol id="i-medal" viewBox="0 0 24 24"><circle cx="12" cy="14.5" r="5.5"/><path d="M8.5 10L6 3.5h4l2 4.5 2-4.5h4L15.5 10"/></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3.5 19.5c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5M15 14.2c.6-.1 1.3-.2 2-.2 2.2 0 4 1.8 4 4.5"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M12 3l8.5 4.5v9L12 21l-8.5-4.5v-9z"/><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6l8.5 7 8.5-7"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M8 10.5v6M8 7.5v.01M11.5 16.5v-6M11.5 13c0-1.5 1-2.5 2.3-2.5s2.2 1 2.2 2.5v3.5"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><circle cx="6.5" cy="5.5" r="2"/><circle cx="6.5" cy="18.5" r="2"/><circle cx="17.5" cy="7.5" r="2"/><path d="M6.5 7.5v9M17.5 9.5c0 4-4 4-9.3 7.5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 19.5h14"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+    <symbol id="i-fuel" viewBox="0 0 24 24"><path d="M4.5 20.5V5A1.5 1.5 0 0 1 6 3.5h6A1.5 1.5 0 0 1 13.5 5v15.5M3 20.5h12M7 7.5h4"/><path d="M13.5 10H15a1.5 1.5 0 0 1 1.5 1.5v4.25a1.25 1.25 0 0 0 2.5 0V8.5L16.5 6"/></symbol>
+    <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="1.5"/><path d="M3.5 8.5h17M8.5 8.5v12"/><path d="M11.5 17v-2.5M14.5 17v-5M17.5 17v-3.5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4.5 4.5A1.5 1.5 0 0 1 6 3h12.5v15H6a1.5 1.5 0 0 0-1.5 1.5zM4.5 19.5A1.5 1.5 0 0 0 6 21h12.5v-3"/><path d="M8.5 7h6"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M6.5 3.5h7l4 4v13h-11z"/><path d="M13.5 3.5v4h4"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><circle cx="9" cy="10" r="1.75"/><path d="M20.5 16l-5-5-8 8.5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5l9 16H3z"/><path d="M12 10v4M12 16.75v.01"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.3 3.6 5.1 3.6 8.5s-1.2 6.2-3.6 8.5c-2.4-2.3-3.6-5.1-3.6-8.5s1.2-6.2 3.6-8.5z"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="../index.html"><span class="brand-mark" aria-hidden="true">AN</span><span class="brand-name">Anis Nefikha</span></a>
+
+      <nav class="site-nav" aria-label="Navigation principale">
+        <ul class="site-nav__list">
+          <li><a href="../index.html#accueil">Accueil</a></li>
+          <li><a href="../index.html#projets">Projets</a></li>
+          <li><a href="../index.html#competences">Compétences<span class="nav-extra">&nbsp;et parcours</span></a></li>
+          <li><a href="../index.html#a-propos" aria-current="true"><span class="nav-extra">À propos et&nbsp;</span>Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu" tabindex="-1">
+
+    <div class="page-head">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane" data-reveal>
+          <ol>
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="../index.html#centres-interet">Centres d'intérêt</a></li>
+            <li aria-current="page">Arts Martiaux &amp; JJB</li>
+          </ol>
+        </nav>
+
+        <div class="page-head__title-row" data-reveal>
+          <span class="project-logo project-logo--lg" aria-hidden="true"><svg class="icon"><use href="#i-medal"/></svg></span>
+          <div>
+            <p class="page-head__kicker"><strong>Centre d'intérêt 01</strong> · Sport de combat</p>
+            <h1 class="page-head__title">Arts Martiaux &amp; JJB</h1>
+          </div>
+        </div>
+
+        <p class="page-head__lead" data-reveal>Pratique assidue du Jiu-Jitsu Brésilien&nbsp;: une discipline axée sur la stratégie, la rigueur et le dépassement de soi.</p>
+
+        <div class="button-group" data-reveal>
+          <a class="button button--secondary" href="../index.html#centres-interet">
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+            Tous mes centres d'intérêt
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container interest-layout">
+      <figure class="interest-photo" data-reveal>
+        <img src="../assets/images/passions/jjb.jpg" alt="Photo de groupe en kimono devant la bannière de l'académie de jiu-jitsu brésilien" width="1170" height="700">
+        <figcaption>Avec mes partenaires d'entraînement.</figcaption>
+      </figure>
+
+      <section class="interest-keys" aria-labelledby="en-bref">
+        <h2 class="interest-title" id="en-bref" data-reveal>En bref</h2>
+        <ul class="key-list">
+          <li class="key" data-reveal><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Stratégie</li>
+          <li class="key" data-reveal><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Rigueur</li>
+          <li class="key" data-reveal><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Dépassement de soi</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="container next-project-wrap">
+      <a class="next-project" href="voyages.html" data-reveal>
+        <span class="project-logo" aria-hidden="true"><svg class="icon"><use href="#i-globe"/></svg></span>
+        <span class="next-project__text">
+          <span class="next-project__label">Autre centre d'intérêt</span>
+          <span class="next-project__title">Voyages</span>
+        </span>
+        <svg class="icon next-project__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© 2026 Anis Nefikha</div>
+  </footer>
+
+</body>
+</html>

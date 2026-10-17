@@ -1,0 +1,77 @@
+/* ==========================================================================
+   01-tokens.css — Variables uniquement
+   Direction artistique « éditorial sombre », en noir et bleu. Aucune règle ici, seulement
+   des custom properties sur :root.
+   ========================================================================== */
+
+:root {
+  /* Palette noir et bleu, reprise de la bannière LinkedIn (bleu marine #1F3A5F) */
+  --color-bg: #0A0F18;          /* fond noir bleuté */
+  --color-bg-deep: #0D1726;     /* bandes alternées (compétences, pied de page) */
+  --color-surface: #111D30;     /* cartes et blocs */
+  --color-raised: #16253C;      /* survol des cartes, barres de titre */
+  --color-navy: #1F3A5F;        /* bleu de la bannière : halos et dégradés, jamais sous un texte orange */
+  --color-border: #22324A;      /* filets de 1px */
+  --color-border-strong: #2E4566;
+  --color-text: #ECEFF4;        /* texte principal : 16.7:1 sur le fond, 10:1 sur le bleu */
+  --color-muted: #A6B1C2;       /* texte secondaire : 8.9:1 sur le fond, 5.3:1 sur le bleu */
+  --color-blue: #8DB4E8;        /* bleu clair : détails et code, 9:1 sur le fond */
+  --color-accent: #FF5A36;      /* accent orange : 6.2:1 sur le fond, 5:1 sur raised (3.7:1 sur le bleu : pas de texte orange dessus) */
+  --color-accent-ink: #0A0F18;  /* texte posé sur l'accent : 6.2:1 */
+  --color-grid: rgba(141, 180, 232, 0.06); /* trame de la signature */
+  --color-glow: rgba(31, 58, 95, 0.6);     /* halo bleu derrière le hero */
+  --color-warning: #E3B98A;     /* chaînes de code et alertes « Attention » : 10.6:1 sur le fond */
+  --header-bg: rgba(10, 15, 24, 0.88);
+
+  /* Polices (les « Fallback » limitent le décalage au chargement, voir 02-base.css) */
+  --font-heading: "Space Grotesk", "Space Grotesk Fallback", system-ui, sans-serif;
+  --font-body: "Inter", "Inter Fallback", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, monospace;
+
+  /* Échelle typographique */
+  --text-h1: clamp(3rem, 8vw, 6.5rem);
+  --text-h2: clamp(2rem, 4vw, 3rem);
+  --text-h3: 1.375rem;
+  --text-body: 1rem;            /* 16px mobile */
+  --text-body-desktop: 1.0625rem; /* 17px desktop */
+  --text-label: 0.8125rem;      /* 13px */
+  --text-label-sm: 0.75rem;     /* 12px */
+  --text-contact: clamp(1.5rem, 3vw, 2.25rem);
+
+  --tracking-heading: -0.03em;
+  --tracking-label: 0.08em;
+  --leading-heading: 1.05;
+  --leading-body: 1.6;
+
+  /* Espacements */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 1rem;     /* 16px */
+  --space-4: 1.5rem;   /* 24px */
+  --space-5: 2rem;     /* 32px */
+  --space-6: 3rem;     /* 48px */
+  --space-7: 4.5rem;   /* 72px  : entre sections, mobile */
+  --space-8: 7.5rem;   /* 120px : entre sections, desktop */
+
+  /* Rayons */
+  --radius-sm: 8px;    /* boutons, captures */
+  --radius-md: 12px;   /* cartes */
+
+  /* Mise en page */
+  --container-max: 1120px;
+  --container-padding: 16px;          /* mobile */
+  --container-padding-desktop: 32px;
+  --grid-columns: 12;
+  --grid-gap: 24px;
+  --grid-step: 120px;                 /* pas de la trame du hero */
+  --header-height: 4rem;
+  --tap-target: 44px;
+
+  /* Mouvement */
+  --duration-hover: 200ms;
+  --duration-reveal: 700ms;
+  --reveal-offset: 24px;
+  --reveal-step: 90ms;          /* décalage entre deux éléments qui apparaissent ensemble */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}

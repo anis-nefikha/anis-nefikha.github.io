@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anis Nefikha — Data &amp; Python</title>
+  <meta name="description" content="Portfolio d'Anis Nefikha, étudiant en BUT Science des Données à l'IUT de Lille. Projets data et Python, à la recherche d'un stage d'un mois en data, de juillet à août.">
+  <meta name="theme-color" content="#0A0F18">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Anis Nefikha — Data &amp; Python">
+  <meta property="og:description" content="Étudiant en BUT Science des Données (IUT de Lille), à la recherche d'un stage d'un mois en data, de juillet à août. Projets, compétences et contact.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://anis-nefikha.github.io/">
+  <meta property="og:image" content="https://anis-nefikha.github.io/assets/images/apercu-partage.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Bannière d'Anis Nefikha, étudiant data analyst en BUT Science des Données">
+  <link rel="canonical" href="https://anis-nefikha.github.io/">
+
+  <!-- Favicon SVG placeholder (initiales AN), intégré pour ne pas ajouter de fichier -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0F18'/%3E%3Ctext x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='28' fill='%23FF5A36'%3EAN%3C/text%3E%3C/svg%3E">
+
+  <!-- Polices Google : uniquement les graisses utilisées, font-display: swap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Space+Grotesk:wght@600&display=swap">
+
+  <!-- Feuilles de style : l'ordre compte (tokens → base → layout → composants) -->
+  <link rel="stylesheet" href="css/01-tokens.css">
+  <link rel="stylesheet" href="css/02-base.css">
+  <link rel="stylesheet" href="css/03-layout.css">
+  <link rel="stylesheet" href="css/04-components.css">
+
+  <!-- Apparitions au défilement : masque les blocs [data-reveal] avant le premier affichage.
+       Mouvement réduit demandé, ou main.js indisponible : rien n'est masqué. -->
+  <script>
+    (function (root) {
+      if (!window.matchMedia || !matchMedia('(prefers-reduced-motion: no-preference)').matches || !('IntersectionObserver' in window)) return;
+      root.classList.add('reveal-on');
+      setTimeout(function () {
+        if (!root.classList.contains('reveal-ready')) root.classList.remove('reveal-on');
+      }, 2500);
+    })(document.documentElement);
+  </script>
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <!-- Icônes (sprite SVG décoratif, réutilisé avec <use>) -->
+  <svg class="icon-sprite" aria-hidden="true" hidden>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.5"/><path d="M4.5 5.5v13c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5v-13M4.5 12c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5"/></symbol>
+    <symbol id="i-table" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M3.5 9.5h17M3.5 14.5h17M9.5 9.5v10"/></symbol>
+    <symbol id="i-medal" viewBox="0 0 24 24"><circle cx="12" cy="14.5" r="5.5"/><path d="M8.5 10L6 3.5h4l2 4.5 2-4.5h4L15.5 10"/></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3.5 19.5c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5M15 14.2c.6-.1 1.3-.2 2-.2 2.2 0 4 1.8 4 4.5"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M12 3l8.5 4.5v9L12 21l-8.5-4.5v-9z"/><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6l8.5 7 8.5-7"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M8 10.5v6M8 7.5v.01M11.5 16.5v-6M11.5 13c0-1.5 1-2.5 2.3-2.5s2.2 1 2.2 2.5v3.5"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><circle cx="6.5" cy="5.5" r="2"/><circle cx="6.5" cy="18.5" r="2"/><circle cx="17.5" cy="7.5" r="2"/><path d="M6.5 7.5v9M17.5 9.5c0 4-4 4-9.3 7.5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 19.5h14"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+    <symbol id="i-fuel" viewBox="0 0 24 24"><path d="M4.5 20.5V5A1.5 1.5 0 0 1 6 3.5h6A1.5 1.5 0 0 1 13.5 5v15.5M3 20.5h12M7 7.5h4"/><path d="M13.5 10H15a1.5 1.5 0 0 1 1.5 1.5v4.25a1.25 1.25 0 0 0 2.5 0V8.5L16.5 6"/></symbol>
+    <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="1.5"/><path d="M3.5 8.5h17M8.5 8.5v12"/><path d="M11.5 17v-2.5M14.5 17v-5M17.5 17v-3.5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4.5 4.5A1.5 1.5 0 0 1 6 3h12.5v15H6a1.5 1.5 0 0 0-1.5 1.5zM4.5 19.5A1.5 1.5 0 0 0 6 21h12.5v-3"/><path d="M8.5 7h6"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M6.5 3.5h7l4 4v13h-11z"/><path d="M13.5 3.5v4h4"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><circle cx="9" cy="10" r="1.75"/><path d="M20.5 16l-5-5-8 8.5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5l9 16H3z"/><path d="M12 10v4M12 16.75v.01"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.3 3.6 5.1 3.6 8.5s-1.2 6.2-3.6 8.5c-2.4-2.3-3.6-5.1-3.6-8.5s1.2-6.2 3.6-8.5z"/></symbol>
+  </svg>
+
+  <!-- Lien d'évitement : visible uniquement au focus clavier -->
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="#accueil"><span class="brand-mark" aria-hidden="true">AN</span><span class="brand-name">Anis Nefikha</span></a>
+
+      <!-- Toujours visible, en haut de chaque page (libellés courts sur mobile) -->
+      <nav class="site-nav" aria-label="Navigation principale">
+        <ul class="site-nav__list">
+          <li><a href="#accueil">Accueil</a></li>
+          <li><a href="#projets">Projets</a></li>
+          <li><a href="#competences">Compétences<span class="nav-extra">&nbsp;et parcours</span></a></li>
+          <li><a href="#a-propos"><span class="nav-extra">À propos et&nbsp;</span>Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu" tabindex="-1">
+
+    <!-- ============================================================
+         SECTION ACCUEIL
+         ============================================================ -->
+    <section class="section section--accueil" id="accueil" aria-labelledby="accueil-titre">
+      <div class="container grid hero__grid">
+        <p class="section-head" aria-hidden="true" data-reveal><span class="section-number">01</span> Accueil</p>
+
+        <!-- Bannière reprise de LinkedIn (le nom et le titre sont déjà dans le h1 et le sous-titre) -->
+        <img class="hero__banner banner-img" data-reveal src="assets/images/banniere-linkedin.jpg" alt="" width="1584" height="396">
+
+        <img class="hero__photo" data-reveal src="assets/images/anis-nefikha.jpg" alt="Portrait d'Anis Nefikha" width="260" height="260">
+
+        <h1 id="accueil-titre" class="hero__title" data-reveal>Anis Nefikha</h1>
+        <p class="section__subtitle hero__subtitle" data-reveal>Étudiant en BUT Science des Données</p>
+
+        <p class="hero__intro" data-reveal>Étudiant en Science des Données et ancien gestionnaire comptable, je combine l'analyse technique et la rigueur financière pour transformer la donnée brute en leviers de décision stratégiques.</p>
+
+        <p class="hero__goal" data-reveal>Je recherche un <strong>stage d'un mois, de juillet à août</strong>, pour mettre un pied dans le monde de la data. Je me forme dès maintenant pour être utile dès mon arrivée.</p>
+
+        <div class="button-group" data-reveal>
+          <a class="button button--primary" href="#projets">Voir mes projets</a>
+          <a class="button button--secondary" href="assets/cv/cv-anis-nefikha.pdf">
+            <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
+            Télécharger mon CV
+          </a>
+        </div>
+
+        <!-- Bloc « rapport » : 3 faits clés -->
+        <dl class="hero__report report" data-reveal>
+          <div class="report__row">
+            <dt class="report__label">IUT de Lille · 1re année</dt>
+            <dd class="report__value">BUT SD</dd>
+          </div>
+          <div class="report__row">
+            <dt class="report__label">Comptabilité et gestion · obtenu en alternance</dt>
+            <dd class="report__value">BTS CG</dd>
+          </div>
+          <div class="report__row">
+            <dt class="report__label">Recherché · 1 mois de juillet à août</dt>
+            <dd class="report__value">Stage</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION PROJETS (en premier après l'accueil : priorité recruteurs)
+         ============================================================ -->
+    <section class="section section--projets" id="projets" aria-labelledby="projets-titre">
+      <div class="container">
+        <h2 id="projets-titre" class="section-title" data-reveal><span class="section-number" aria-hidden="true">02</span>Projets</h2>
+
+        <!-- Chaque carte ouvre la page du projet (README complet), générée par projets.py -->
+        <ul class="project-list grid">
+          <li data-reveal>
+            <article class="project-card">
+              <div class="project-card__cover" aria-hidden="true">
+                <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <defs>
+                    <linearGradient id="couvCarteFond" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1F3A5F"/><stop offset="1" stop-color="#0D1726"/></linearGradient>
+                    <pattern id="couvCarteGrille" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#8DB4E8" stroke-opacity=".09"/></pattern>
+                    <radialGradient id="couvCarteHalo"><stop offset="0" stop-color="#FF5A36" stop-opacity=".22"/><stop offset="1" stop-color="#FF5A36" stop-opacity="0"/></radialGradient>
+                  </defs>
+                  <rect width="320" height="140" fill="url(#couvCarteFond)"/>
+                  <rect width="320" height="140" fill="url(#couvCarteGrille)"/>
+                  <g fill="none" stroke="#8DB4E8" stroke-linecap="round">
+                    <path d="M-10 104C60 92 96 60 160 70s110-34 180-40" stroke-opacity=".22" stroke-width="6"/>
+                    <path d="M120-10c12 50 30 100 20 160" stroke-opacity=".16" stroke-width="4"/>
+                    <path d="M232 150c-8-40-36-62-72-80" stroke-opacity=".12" stroke-width="3"/>
+                  </g>
+                  <circle cx="160" cy="70" r="56" fill="url(#couvCarteHalo)" stroke="#8DB4E8" stroke-opacity=".45" stroke-dasharray="3 5"/>
+                  <g fill="#8DB4E8" fill-opacity=".6">
+                    <circle cx="112" cy="86" r="3"/><circle cx="200" cy="58" r="3"/><circle cx="150" cy="108" r="3"/><circle cx="208" cy="100" r="3"/>
+                    <circle cx="58" cy="40" r="3"/><circle cx="268" cy="104" r="3"/><circle cx="252" cy="36" r="3"/><circle cx="40" cy="112" r="3"/>
+                  </g>
+                  <g stroke="#E3B98A" stroke-width="1.5" stroke-linecap="round">
+                    <circle cx="126" cy="42" r="6.5" fill="#0A0F18"/>
+                    <path d="M126 39v3.5M126 45.2v.1"/>
+                  </g>
+                  <circle cx="160" cy="70" r="10" fill="#ECEFF4" fill-opacity=".14"/>
+                  <circle cx="160" cy="70" r="4" fill="#ECEFF4"/>
+                  <g font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle" fill="#0A0F18">
+                    <circle cx="186" cy="86" r="9.5" fill="#FF5A36"/><text x="186" y="89.3">1</text>
+                    <circle cx="132" cy="62" r="8" fill="#FF5A36"/><text x="132" y="65.3">2</text>
+                    <circle cx="180" cy="34" r="8" fill="#FF5A36"/><text x="180" y="37.3">3</text>
+                  </g>
+                </svg>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__head">
+                  <span class="project-logo" aria-hidden="true"><svg class="icon"><use href="#i-fuel"/></svg></span>
+                  <p class="project-card__kicker">Projet 01 · Python · pandas · API</p>
+                </div>
+                <h3 class="project-card__title"><a class="project-card__link" href="projets/comparateur-carburants.html">Carburant Comparateur</a></h3>
+                <p class="project-card__subtitle">Comparateur de prix des carburants</p>
+                <p class="project-card__summary">Outil Python qui trouve les stations-service les moins chères autour d'une ville, à partir des données ouvertes, et qui vérifie que les prix affichés sont encore à jour.</p>
+                <span class="project-card__cta" aria-hidden="true">Lire le README <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+              </div>
+            </article>
+          </li>
+          <li data-reveal>
+            <article class="project-card">
+              <div class="project-card__cover" aria-hidden="true">
+                <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <defs>
+                    <linearGradient id="couvDashFond" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1F3A5F"/><stop offset="1" stop-color="#0D1726"/></linearGradient>
+                  </defs>
+                  <rect width="320" height="140" fill="url(#couvDashFond)"/>
+                  <g fill="#0A0F18" fill-opacity=".55" stroke="#8DB4E8" stroke-opacity=".22">
+                    <rect x="16" y="18" width="88" height="48" rx="6"/>
+                    <rect x="16" y="76" width="88" height="48" rx="6"/>
+                    <rect x="116" y="18" width="188" height="106" rx="6"/>
+                  </g>
+                  <g font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing=".6" fill="#A6B1C2">
+                    <text x="26" y="34">CA</text>
+                    <text x="26" y="92">MARGE OP.</text>
+                  </g>
+                  <g font-family="Space Grotesk, sans-serif" font-size="17" font-weight="600" fill="#ECEFF4">
+                    <text x="26" y="56">120 M$</text>
+                    <text x="26" y="114">39 %</text>
+                  </g>
+                  <path d="M128 44h164M128 70h164M128 96h164" stroke="#8DB4E8" stroke-opacity=".1"/>
+                  <path d="M128 112.5h164" stroke="#A6B1C2" stroke-opacity=".5"/>
+                  <rect x="136" y="78" width="18" height="34" rx="2" fill="#F2545B"/>
+                  <rect x="170" y="60" width="18" height="52" rx="2" fill="#38B6FF"/>
+                  <rect x="204" y="70" width="18" height="42" rx="2" fill="#F5C542"/>
+                  <rect x="238" y="48" width="18" height="64" rx="2" fill="#3FBF8A"/>
+                  <rect x="272" y="34" width="18" height="78" rx="2" fill="#FF5A36"/>
+                  <path d="M145 66l34-18 34 10 34-22 34-14" fill="none" stroke="#ECEFF4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <g fill="#0A0F18" stroke="#ECEFF4" stroke-width="1.5">
+                    <circle cx="145" cy="66" r="3.2"/><circle cx="179" cy="48" r="3.2"/><circle cx="213" cy="58" r="3.2"/><circle cx="247" cy="36" r="3.2"/><circle cx="281" cy="22" r="3.2"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__head">
+                  <span class="project-logo" aria-hidden="true"><svg class="icon"><use href="#i-dashboard"/></svg></span>
+                  <p class="project-card__kicker">Projet 02 · Excel · TCD · Dashboard</p>
+                </div>
+                <h3 class="project-card__title"><a class="project-card__link" href="projets/dashboard-adidas.html">Excel Dashboard Adidas</a></h3>
+                <p class="project-card__subtitle">Analyse des ventes Adidas aux États-Unis</p>
+                <p class="project-card__summary">Tableau de bord interactif construit dans Excel à partir de 9&nbsp;648 ventes Adidas aux États-Unis, avec un audit de la qualité des données avant toute analyse.</p>
+                <span class="project-card__cta" aria-hidden="true">Lire le README <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION COMPÉTENCES ET PARCOURS
+         ============================================================ -->
+    <section class="section section--band section--competences" id="competences" aria-labelledby="competences-titre">
+      <div class="container grid competences__grid">
+        <h2 id="competences-titre" class="section-title" data-reveal><span class="section-number" aria-hidden="true">03</span>Compétences et parcours</h2>
+
+        <ul class="skill-groups">
+          <li class="skill-group">
+            <h3 class="skill-group__title" data-reveal>Langages</h3>
+            <ul class="skill-group__list">
+              <li data-reveal><span class="skill-logo" aria-hidden="true"><svg class="skill-logo__img" focusable="false" viewBox="0 0 256 255"><defs><linearGradient id="logoPython0" x1="12.959%" x2="79.639%" y1="12.039%" y2="78.201%"><stop offset="0%" stop-color="#387EB8"/><stop offset="100%" stop-color="#366994"/></linearGradient><linearGradient id="logoPython1" x1="19.128%" x2="90.742%" y1="20.579%" y2="88.429%"><stop offset="0%" stop-color="#FFE052"/><stop offset="100%" stop-color="#FFC331"/></linearGradient></defs><path fill="url(#logoPython0)" d="M126.916.072c-64.832 0-60.784 28.115-60.784 28.115l.072 29.128h61.868v8.745H41.631S.145 61.355.145 126.77c0 65.417 36.21 63.097 36.21 63.097h21.61v-30.356s-1.165-36.21 35.632-36.21h61.362s34.475.557 34.475-33.319V33.97S194.67.072 126.916.072M92.802 19.66a11.12 11.12 0 0 1 11.13 11.13a11.12 11.12 0 0 1-11.13 11.13a11.12 11.12 0 0 1-11.13-11.13a11.12 11.12 0 0 1 11.13-11.13"/><path fill="url(#logoPython1)" d="M128.757 254.126c64.832 0 60.784-28.115 60.784-28.115l-.072-29.127H127.6v-8.745h86.441s41.486 4.705 41.486-60.712c0-65.416-36.21-63.096-36.21-63.096h-21.61v30.355s1.165 36.21-35.632 36.21h-61.362s-34.475-.557-34.475 33.32v56.013s-5.235 33.897 62.518 33.897m34.114-19.586a11.12 11.12 0 0 1-11.13-11.13a11.12 11.12 0 0 1 11.13-11.131a11.12 11.12 0 0 1 11.13 11.13a11.12 11.12 0 0 1-11.13 11.13"/></svg></span>Python</li>
+              <li data-reveal><span class="skill-logo" aria-hidden="true"><svg class="skill-logo__img" focusable="false" viewBox="0 0 32 32"><path fill="#ffda44" d="M8.562 15.256A21.2 21.2 0 0 0 16 16.449a21.2 21.2 0 0 0 7.438-1.194c1.864-.727 2.525-1.535 2.525-2V9.7a10.4 10.4 0 0 1-2.084 1.076A22.3 22.3 0 0 1 16 12.078a22.4 22.4 0 0 1-7.879-1.3A10.3 10.3 0 0 1 6.037 9.7v3.55c0 .474.663 1.278 2.525 2.006m0 6.705a15.6 15.6 0 0 0 2.6.741a25 25 0 0 0 4.838.453a25 25 0 0 0 4.838-.452a15.6 15.6 0 0 0 2.6-.741c1.864-.727 2.525-1.535 2.525-2v-3.39a10.7 10.7 0 0 1-1.692.825A23.5 23.5 0 0 1 16 18.74a23.5 23.5 0 0 1-8.271-1.348a11 11 0 0 1-1.692-.825v3.393c0 .466.663 1.271 2.525 2.001M16 30c5.5 0 9.963-1.744 9.963-3.894v-2.837a10.5 10.5 0 0 1-1.535.762l-.157.063A23.5 23.5 0 0 1 16 25.445a23.4 23.4 0 0 1-8.271-1.351l-.157-.063a10.5 10.5 0 0 1-1.535-.762v2.837C6.037 28.256 10.5 30 16 30"/><ellipse cx="16" cy="5.894" fill="#ffda44" rx="9.963" ry="3.894"/></svg></span>SQL</li>
+            </ul>
+          </li>
+          <li class="skill-group">
+            <h3 class="skill-group__title" data-reveal>Outils &amp; compétences analytiques</h3>
+            <ul class="skill-group__list">
+              <li data-reveal><span class="skill-logo" aria-hidden="true"><svg class="skill-logo__img" focusable="false" viewBox="0 0 32 32"><defs><linearGradient id="logoExcel0" x1="4.494" x2="13.832" y1="-2092.086" y2="-2075.914" gradientTransform="translate(0 2100)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#18884f"/><stop offset=".5" stop-color="#117e43"/><stop offset="1" stop-color="#0b6631"/></linearGradient></defs><path fill="#185c37" d="M19.581 15.35L8.512 13.4v14.409A1.19 1.19 0 0 0 9.705 29h19.1A1.19 1.19 0 0 0 30 27.809V22.5Z"/><path fill="#21a366" d="M19.581 3H9.705a1.19 1.19 0 0 0-1.193 1.191V9.5L19.581 16l5.861 1.95L30 16V9.5Z"/><path fill="#107c41" d="M8.512 9.5h11.069V16H8.512Z"/><path d="M16.434 8.2H8.512v16.25h7.922a1.2 1.2 0 0 0 1.194-1.191V9.391A1.2 1.2 0 0 0 16.434 8.2" opacity=".1"/><path d="M15.783 8.85H8.512V25.1h7.271a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2"/><path d="M15.783 8.85H8.512V23.8h7.271a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2"/><path d="M15.132 8.85h-6.62V23.8h6.62a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2"/><path fill="url(#logoExcel0)" d="M3.194 8.85h11.938a1.193 1.193 0 0 1 1.194 1.191v11.918a1.193 1.193 0 0 1-1.194 1.191H3.194A1.19 1.19 0 0 1 2 21.959V10.041A1.19 1.19 0 0 1 3.194 8.85"/><path fill="#fff" d="m5.7 19.873l2.511-3.884l-2.3-3.862h1.847L9.013 14.6c.116.234.2.408.238.524h.017q.123-.281.26-.546l1.342-2.447h1.7l-2.359 3.84l2.419 3.905h-1.809l-1.45-2.711A2.4 2.4 0 0 1 9.2 16.8h-.024a1.7 1.7 0 0 1-.168.351l-1.493 2.722Z"/><path fill="#33c481" d="M28.806 3h-9.225v6.5H30V4.191A1.19 1.19 0 0 0 28.806 3"/><path fill="#107c41" d="M19.581 16H30v6.5H19.581Z"/></svg></span><span>Excel <span class="skill-group__detail">TCD, automatisation, analyse, <svg class="vba-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9.5l3-2.5 3 2.5-3 2.5zM17 9.5l3-2.5 3 2.5-3 2.5zM13 6l3-2.5L19 6l-3 2.5z"/><rect x="3" y="13" width="26" height="15" rx="2.5"/><text x="16" y="24.5" text-anchor="middle">VBA</text></svg>notions de VBA</span></span></li>
+              <li data-reveal><span class="skill-logo" aria-hidden="true"><svg class="skill-logo__img skill-logo__img--wide" focusable="false" viewBox="0 4.8 24 14.4"><path fill="#00D639" d="M2.702 5.316C1.167 5.316 0 6.48 0 7.972c0 1.635 1.167 2.267 2.46 2.655c1.224.387 1.804.818 1.804 1.666c0 .86-.64 1.465-1.477 1.465c-.84 0-1.566-.604-1.566-1.535c0-.516.242-.647.242-.934c0-.33-.227-.574-.599-.574c-.423 0-.864.647-.864 1.566c0 1.48 1.266 2.57 2.787 2.57c1.535 0 2.701-1.163 2.701-2.656c0-1.623-1.166-2.267-2.472-2.655c-1.209-.372-1.792-.818-1.792-1.666c0-.845.626-1.45 1.463-1.45c.867 0 1.565.617 1.577 1.465c.016.388.285.617.599.617a.592.592 0 0 0 .61-.647c-.027-1.48-1.263-2.543-2.771-2.543m6.171 9.52c.683 0 1.21-.23 1.21-.69a.57.57 0 0 0-.557-.574c-.2 0-.341.085-.668.085c-.882 0-1.577-.76-1.577-1.65c0-.962.71-1.725 1.608-1.725c1.009 0 1.65.775 1.65 1.895v2.054c0 .36.284.604.625.604c.327 0 .61-.244.61-.604v-2.097c0-1.72-1.178-2.984-2.858-2.984c-1.566 0-2.86 1.22-2.86 2.856c0 1.58 1.282 2.83 2.817 2.83m6.257 3.848c1.535 0 2.701-1.163 2.701-2.656c0-1.635-1.166-2.267-2.472-2.655c-1.209-.387-1.792-.818-1.792-1.666s.64-1.465 1.463-1.465c.84 0 1.577.604 1.577 1.535c0 .519-.241.647-.241.934c0 .33.226.574.583.574c.441 0 .882-.647.882-1.566c0-1.48-1.278-2.57-2.801-2.57c-1.535 0-2.687 1.163-2.687 2.656c0 1.623 1.152 2.267 2.46 2.655c1.224.372 1.804.818 1.804 1.666c0 .86-.64 1.45-1.462 1.45c-.883 0-1.566-.601-1.578-1.465c-.015-.388-.3-.604-.598-.604c-.327 0-.626.216-.61.631c.011 1.499 1.247 2.546 2.77 2.546zm6.171-3.849c.795 0 1.424-.229 1.862-.503c.426-.272.595-.504.595-.76c0-.272-.2-.516-.568-.516c-.441 0-.795.66-1.877.66c-.952 0-1.707-.76-1.707-1.722c0-.95.725-1.724 1.635-1.724c.982 0 1.508.647 1.508 1.062c0 .116-.085.174-.2.174h-1.194c-.326 0-.568.216-.568.503c0 .314.242.546.568.546h1.636c.625 0 1.009-.33 1.009-.89c0-1.408-1.194-2.512-2.774-2.512c-1.566 0-2.83 1.263-2.83 2.84s1.312 2.842 2.905 2.842"/></svg></span>Sage Comptabilité</li>
+              <li data-reveal><span class="skill-logo" aria-hidden="true"><svg class="skill-logo__img" focusable="false" viewBox="0 0 24 24"><rect x="3" y="14.5" width="3.2" height="6.5" rx=".6" fill="#F2545B"/><rect x="7.6" y="10.5" width="3.2" height="10.5" rx=".6" fill="#38B6FF"/><rect x="12.2" y="13" width="3.2" height="8" rx=".6" fill="#F5C542"/><rect x="16.8" y="7.5" width="3.2" height="13.5" rx=".6" fill="#3FBF8A"/><path d="M2 21.4h20" stroke="#A6B1C2" stroke-width="1.2" stroke-linecap="round"/><path d="M4.6 10.4l4.6-4.2 4.6 2.6 4.6-5.4" fill="none" stroke="#ECEFF4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4.6" cy="10.4" r="1.35" fill="#ECEFF4"/><circle cx="9.2" cy="6.2" r="1.35" fill="#F5C542"/><circle cx="13.8" cy="8.8" r="1.35" fill="#ECEFF4"/><circle cx="18.4" cy="3.4" r="1.35" fill="#F5C542"/></svg></span>Statistiques, Probabilités &amp; Mathématiques</li>
+            </ul>
+          </li>
+        </ul>
+
+        <ol class="timeline" aria-label="Parcours">
+          <li class="timeline__item" data-reveal>
+            <h3 class="timeline__title">BUT Science des Données</h3>
+            <p class="timeline__meta">IUT de Lille · 1re année</p>
+          </li>
+          <li class="timeline__item" data-reveal>
+            <h3 class="timeline__title">BTS Comptabilité et Gestion (BTS CG)</h3>
+            <p class="timeline__meta">Obtenu en alternance · 2024–2026</p>
+            <p class="timeline__text">Expérience en comptabilité &amp; gestion financière.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION À PROPOS ET CONTACT
+         ============================================================ -->
+    <section class="section section--a-propos" id="a-propos" aria-labelledby="a-propos-titre">
+      <div class="container">
+        <h2 id="a-propos-titre" class="section-title" data-reveal><span class="section-number" aria-hidden="true">04</span>À propos et contact</h2>
+
+        <h3 class="subsection-title" id="centres-interet" data-reveal>Centres d'intérêt</h3>
+        <!-- Chaque carte ouvre la page du centre d'intérêt, générée par centres_interet.py -->
+        <ul class="project-list grid interest-list">
+          <li data-reveal>
+            <article class="project-card">
+              <div class="project-card__cover" aria-hidden="true">
+                <img src="assets/images/passions/jjb-carte.jpg" alt="" width="640" height="280" loading="lazy">
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__head">
+                  <span class="project-logo" aria-hidden="true"><svg class="icon"><use href="#i-medal"/></svg></span>
+                  <p class="project-card__kicker">Centre d'intérêt 01 · Sport de combat</p>
+                </div>
+                <h4 class="project-card__title"><a class="project-card__link" href="centres-interet/jjb.html">Arts Martiaux &amp; JJB</a></h4>
+                <p class="project-card__summary">Pratique assidue du Jiu-Jitsu Brésilien&nbsp;: une discipline axée sur la stratégie, la rigueur et le dépassement de soi.</p>
+                <span class="project-card__cta" aria-hidden="true">Découvrir <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+              </div>
+            </article>
+          </li>
+          <li data-reveal>
+            <article class="project-card">
+              <div class="project-card__cover" aria-hidden="true">
+                <div class="cover-gallery"><img src="assets/images/passions/voyage-montagne.jpg" alt="" width="420" height="600" loading="lazy"><img src="assets/images/passions/voyage-cote.jpg" alt="" width="420" height="600" loading="lazy"><img src="assets/images/passions/voyage-plage.jpg" alt="" width="420" height="600" loading="lazy"><img src="assets/images/passions/voyage-tokyo.jpg" alt="" width="420" height="600" loading="lazy"></div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__head">
+                  <span class="project-logo" aria-hidden="true"><svg class="icon"><use href="#i-globe"/></svg></span>
+                  <p class="project-card__kicker">Centre d'intérêt 02 · Découverte</p>
+                </div>
+                <h4 class="project-card__title"><a class="project-card__link" href="centres-interet/voyages.html">Voyages</a></h4>
+                <p class="project-card__summary">De la montagne à la mer jusqu'à Tokyo&nbsp;: découvrir de nouveaux paysages et de nouvelles cultures.</p>
+                <span class="project-card__cta" aria-hidden="true">Découvrir <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+              </div>
+            </article>
+          </li>
+          <li data-reveal>
+            <article class="project-card">
+              <div class="project-card__cover" aria-hidden="true">
+                <div class="cover-illustration" aria-hidden="true"><svg class="icon"><use href="#i-box"/></svg></div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__head">
+                  <span class="project-logo" aria-hidden="true"><svg class="icon"><use href="#i-box"/></svg></span>
+                  <p class="project-card__kicker">Centre d'intérêt 03 · Entrepreneuriat</p>
+                </div>
+                <h4 class="project-card__title"><a class="project-card__link" href="centres-interet/e-commerce.html">E-commerce &amp; Sourcing</a></h4>
+                <p class="project-card__summary">Expérience en e-commerce et sourcing international&nbsp;: un esprit entrepreneurial et un sens aiguisé de l'optimisation.</p>
+                <span class="project-card__cta" aria-hidden="true">Découvrir <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+              </div>
+            </article>
+          </li>
+        </ul>
+
+        <div class="contact">
+          <p class="contact__intro label" data-reveal>Me contacter</p>
+          <a class="contact__email" data-reveal href="mailto:nefikhaanis9@gmail.com">nefikhaanis9@gmail.com</a>
+          <ul class="contact__links" data-reveal>
+            <li>
+              <a href="https://www.linkedin.com/in/anis-nefikha/"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
+            </li>
+            <li>
+              <a href="https://github.com/anis-nefikha"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
+            </li>
+          </ul>
+          <div class="button-group" data-reveal>
+            <a class="button button--primary" href="assets/cv/cv-anis-nefikha.pdf">
+              <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
+              Télécharger mon CV (PDF)
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© 2026 Anis Nefikha</div>
+  </footer>
+
+</body>
+</html>

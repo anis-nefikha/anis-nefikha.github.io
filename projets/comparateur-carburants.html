@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comparateur de prix des carburants — Anis Nefikha</title>
+  <meta name="description" content="Comparateur de prix des carburants en Python : données ouvertes, contrôle de fiabilité des prix et rapport Excel. Projet d&#x27;Anis Nefikha.">
+  <meta name="theme-color" content="#0A0F18">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Comparateur de prix des carburants — Anis Nefikha">
+  <meta property="og:description" content="Comparateur de prix des carburants en Python : données ouvertes, contrôle de fiabilité des prix et rapport Excel. Projet d&#x27;Anis Nefikha.">
+  <meta property="og:type" content="article">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0F18'/%3E%3Ctext x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='28' fill='%23FF5A36'%3EAN%3C/text%3E%3C/svg%3E">
+
+  <!-- Polices Google : uniquement les graisses utilisées, font-display: swap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Space+Grotesk:wght@600&display=swap">
+
+  <link rel="stylesheet" href="../css/01-tokens.css">
+  <link rel="stylesheet" href="../css/02-base.css">
+  <link rel="stylesheet" href="../css/03-layout.css">
+  <link rel="stylesheet" href="../css/04-components.css">
+
+  <!-- Apparitions au défilement : masque les blocs [data-reveal] avant le premier affichage.
+       Mouvement réduit demandé, ou main.js indisponible : rien n'est masqué. -->
+  <script>
+    (function (root) {
+      if (!window.matchMedia || !matchMedia('(prefers-reduced-motion: no-preference)').matches || !('IntersectionObserver' in window)) return;
+      root.classList.add('reveal-on');
+      setTimeout(function () {
+        if (!root.classList.contains('reveal-ready')) root.classList.remove('reveal-on');
+      }, 2500);
+    })(document.documentElement);
+  </script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body>
+
+  <!-- Icônes (sprite SVG décoratif, réutilisé avec <use>) -->
+  <svg class="icon-sprite" aria-hidden="true" hidden>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.5"/><path d="M4.5 5.5v13c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5v-13M4.5 12c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5"/></symbol>
+    <symbol id="i-table" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M3.5 9.5h17M3.5 14.5h17M9.5 9.5v10"/></symbol>
+    <symbol id="i-medal" viewBox="0 0 24 24"><circle cx="12" cy="14.5" r="5.5"/><path d="M8.5 10L6 3.5h4l2 4.5 2-4.5h4L15.5 10"/></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3.5 19.5c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5M15 14.2c.6-.1 1.3-.2 2-.2 2.2 0 4 1.8 4 4.5"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M12 3l8.5 4.5v9L12 21l-8.5-4.5v-9z"/><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6l8.5 7 8.5-7"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M8 10.5v6M8 7.5v.01M11.5 16.5v-6M11.5 13c0-1.5 1-2.5 2.3-2.5s2.2 1 2.2 2.5v3.5"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><circle cx="6.5" cy="5.5" r="2"/><circle cx="6.5" cy="18.5" r="2"/><circle cx="17.5" cy="7.5" r="2"/><path d="M6.5 7.5v9M17.5 9.5c0 4-4 4-9.3 7.5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 19.5h14"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+    <symbol id="i-fuel" viewBox="0 0 24 24"><path d="M4.5 20.5V5A1.5 1.5 0 0 1 6 3.5h6A1.5 1.5 0 0 1 13.5 5v15.5M3 20.5h12M7 7.5h4"/><path d="M13.5 10H15a1.5 1.5 0 0 1 1.5 1.5v4.25a1.25 1.25 0 0 0 2.5 0V8.5L16.5 6"/></symbol>
+    <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="1.5"/><path d="M3.5 8.5h17M8.5 8.5v12"/><path d="M11.5 17v-2.5M14.5 17v-5M17.5 17v-3.5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4.5 4.5A1.5 1.5 0 0 1 6 3h12.5v15H6a1.5 1.5 0 0 0-1.5 1.5zM4.5 19.5A1.5 1.5 0 0 0 6 21h12.5v-3"/><path d="M8.5 7h6"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M6.5 3.5h7l4 4v13h-11z"/><path d="M13.5 3.5v4h4"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><circle cx="9" cy="10" r="1.75"/><path d="M20.5 16l-5-5-8 8.5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5l9 16H3z"/><path d="M12 10v4M12 16.75v.01"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.3 3.6 5.1 3.6 8.5s-1.2 6.2-3.6 8.5c-2.4-2.3-3.6-5.1-3.6-8.5s1.2-6.2 3.6-8.5z"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="../index.html"><span class="brand-mark" aria-hidden="true">AN</span><span class="brand-name">Anis Nefikha</span></a>
+
+      <nav class="site-nav" aria-label="Navigation principale">
+        <ul class="site-nav__list">
+          <li><a href="../index.html#accueil">Accueil</a></li>
+          <li><a href="../index.html#projets" aria-current="true">Projets</a></li>
+          <li><a href="../index.html#competences">Compétences<span class="nav-extra">&nbsp;et parcours</span></a></li>
+          <li><a href="../index.html#a-propos"><span class="nav-extra">À propos et&nbsp;</span>Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu" tabindex="-1">
+
+    <div class="page-head">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane" data-reveal>
+          <ol>
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="../index.html#projets">Projets</a></li>
+            <li aria-current="page">Carburant Comparateur</li>
+          </ol>
+        </nav>
+
+        <div class="page-head__title-row" data-reveal>
+          <span class="project-logo project-logo--lg" aria-hidden="true"><svg class="icon"><use href="#i-fuel"/></svg></span>
+          <div>
+            <p class="page-head__kicker"><strong>Projet 01</strong> · Carburant Comparateur</p>
+            <h1 class="page-head__title">Comparateur de prix des carburants</h1>
+          </div>
+        </div>
+
+        <div class="button-group" data-reveal>
+          <a class="button button--primary" href="https://github.com/anis-nefikha/comparateur-carburants">
+            <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
+            Voir le code sur GitHub
+          </a>
+          <a class="button button--secondary" href="../index.html#projets">
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+            Tous les projets
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container project-layout">
+      <aside class="project-aside" aria-label="Sommaire et code source" data-reveal>
+        <nav class="aside-box toc" aria-labelledby="sommaire-titre">
+          <h2 class="aside-box__title" id="sommaire-titre">Sommaire</h2>
+          <ol class="toc__list">
+            <li><a href="#le-probleme">Le problème</a></li>
+            <li><a href="#realisation">Comment je l'ai réalisé</a>
+              <ol class="toc__sub">
+                <li><a href="#etape-1">Saisie et géocodage</a></li>
+                <li><a href="#etape-2">Collecte en temps réel</a></li>
+                <li><a href="#etape-3">Calcul des distances</a></li>
+                <li><a href="#etape-4">Passage au format long</a></li>
+                <li><a href="#etape-5">Contrôle de fiabilité</a></li>
+                <li><a href="#etape-6">Classement et rapport Excel</a></li>
+              </ol>
+            </li>
+            <li><a href="#choix-techniques">Choix techniques</a></li>
+            <li><a href="#apprentissages">Ce que j'ai appris</a></li>
+            <li><a href="#limites">Limites et pistes d'amélioration</a></li>
+            <li><a href="#lancer">Lancer le projet</a></li>
+          </ol>
+        </nav>
+        <div class="aside-box aside-box--source">
+          <h2 class="aside-box__title">Code source</h2>
+          <p>Dépôt public <code>comparateur-carburants</code>, sous licence MIT.</p>
+          <a class="button button--secondary" href="https://github.com/anis-nefikha/comparateur-carburants">
+            <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
+            Ouvrir GitHub
+          </a>
+        </div>
+      </aside>
+
+      <article class="readme" aria-label="README du projet">
+        <header class="readme__bar">
+          <svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>
+          <span class="readme__file">README.md</span>
+          <span class="readme__repo">anis-nefikha / comparateur-carburants</span>
+        </header>
+        <div class="readme__body md">
+
+          <ul data-reveal class="md-badges" aria-label="Technologies"><li class="md-badge"><span class="md-badge__k">langage</span><span class="md-badge__v">Python 3</span></li><li class="md-badge"><span class="md-badge__k">data</span><span class="md-badge__v">pandas · numpy</span></li><li class="md-badge"><span class="md-badge__k">export</span><span class="md-badge__v">openpyxl</span></li><li class="md-badge"><span class="md-badge__k">source</span><span class="md-badge__v">API open data</span></li><li class="md-badge"><span class="md-badge__k">licence</span><span class="md-badge__v">MIT</span></li></ul>
+          <p data-reveal>Outil Python qui trouve les stations-service les moins chères autour d'une ville, à partir des données ouvertes du ministère de l'Économie, <strong>et qui vérifie que les prix affichés sont encore à jour</strong>.</p>
+          <dl data-reveal class="md-stats"><div class="md-stats__item"><dt>carburants comparés</dt><dd>5</dd></div><div class="md-stats__item"><dt>de rayon maximum</dt><dd>30&nbsp;km</dd></div><div class="md-stats__item"><dt>niveaux de fiabilité</dt><dd>3</dd></div></dl>
+
+          <h2 data-reveal class="md-h2" id="le-probleme">Le problème</h2>
+          <p data-reveal>Les prix des carburants publiés en open data sont <strong>déclarés par les stations elles-mêmes</strong>. En testant une première version du programme, j'ai constaté qu'une station arrivait <strong>1<sup>re</sup> sur 4 carburants</strong>… avec des prix qui n'avaient pas été mis à jour depuis <strong>plus de 50&nbsp;jours</strong>.</p>
+          <div data-reveal class="md-alert md-alert--important">
+            <p class="md-alert__title"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Important</p>
+            <p>Un classement naïf peut recommander des prix qui n'existent plus. Le programme sépare donc les <strong>prix fiables</strong> des <strong>prix douteux</strong> avant d'établir le classement.</p>
+          </div>
+
+          <h2 data-reveal class="md-h2" id="realisation">Comment je l'ai réalisé</h2>
+          <ol class="md-steps">
+            <li class="md-step" data-reveal>
+                <h3 class="md-h3" id="etape-1"><span class="md-step__n" aria-hidden="true">01</span>Saisie et géocodage</h3>
+                <p>L'utilisateur saisit une ville et un rayon en km. La ville est convertie en coordonnées GPS via l'API de la Géoplateforme (IGN). Si plusieurs communes portent le même nom, il choisit dans une liste.</p>
+                <figure class="md-code">
+                  <figcaption class="md-code__bar">
+                    <span class="md-code__file"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>comparateur_carburants.py</span>
+                    <a class="md-code__lines" href="https://github.com/anis-nefikha/comparateur-carburants/blob/35f00361869e6662a67c14f612e42fe1ed959b1b/comparateur_carburants.py#L282-L289">L282–L289<span class="visually-hidden"> : gestion des communes homonymes, voir sur GitHub</span></a>
+                  </figcaption>
+                  <pre class="md-code__pre"><code><span class="code__line"><span class="code__ln" aria-hidden="true">282</span><span class="n">exactes</span> <span class="o">=</span> <span class="p">[</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">283</span>    <span class="n">commune</span> <span class="k">for</span> <span class="n">commune</span> <span class="ow">in</span> <span class="n">communes</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">284</span>    <span class="k">if</span> <span class="n">normaliser</span><span class="p">(</span><span class="n">commune</span><span class="p">[</span><span class="s2">"nom"</span><span class="p">])</span> <span class="o">==</span> <span class="n">normaliser</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">285</span><span class="p">]</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">286</span><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">exactes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">287</span>    <span class="n">choisie</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">exactes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">288</span><span class="k">else</span><span class="p">:</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">289</span>    <span class="n">choisie</span> <span class="o">=</span> <span class="n">choisir_commune</span><span class="p">(</span><span class="n">exactes</span> <span class="ow">or</span> <span class="n">communes</span><span class="p">)</span></span></code></pre>
+                </figure>
+              </li>
+            <li class="md-step" data-reveal>
+                <h3 class="md-h3" id="etape-2"><span class="md-step__n" aria-hidden="true">02</span>Collecte en temps réel</h3>
+                <p>Les prix de toutes les stations du rayon sont récupérés page par page : l'API renvoie au plus 100 résultats par appel, il faut donc la parcourir jusqu'au bout.</p>
+                <figure class="md-code">
+                  <figcaption class="md-code__bar">
+                    <span class="md-code__file"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>comparateur_carburants.py</span>
+                    <a class="md-code__lines" href="https://github.com/anis-nefikha/comparateur-carburants/blob/35f00361869e6662a67c14f612e42fe1ed959b1b/comparateur_carburants.py#L187-L195">L187–L195<span class="visually-hidden"> : collecte paginée, voir sur GitHub</span></a>
+                  </figcaption>
+                  <pre class="md-code__pre"><code><span class="code__line"><span class="code__ln" aria-hidden="true">187</span><span class="n">stations</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">188</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">189</span>    <span class="n">donnees</span> <span class="o">=</span> <span class="n">appeler_api</span><span class="p">(</span><span class="n">URL_CARBURANTS</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">190</span>    <span class="k">if</span> <span class="n">donnees</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">191</span>        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">192</span>    <span class="n">stations</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">donnees</span><span class="p">[</span><span class="s2">"results"</span><span class="p">])</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">193</span>    <span class="n">params</span><span class="p">[</span><span class="s2">"offset"</span><span class="p">]</span> <span class="o">+=</span> <span class="n">TAILLE_PAGE_API</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">194</span>    <span class="k">if</span> <span class="n">params</span><span class="p">[</span><span class="s2">"offset"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">donnees</span><span class="p">[</span><span class="s2">"total_count"</span><span class="p">]:</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">195</span>        <span class="k">break</span></span></code></pre>
+                </figure>
+              </li>
+            <li class="md-step" data-reveal>
+                <h3 class="md-h3" id="etape-3"><span class="md-step__n" aria-hidden="true">03</span>Calcul des distances</h3>
+                <p>Distance à vol d'oiseau avec la formule de haversine. Grâce à numpy, une seule opération calcule la distance de toutes les stations, sans boucle.</p>
+                <figure class="md-code">
+                  <figcaption class="md-code__bar">
+                    <span class="md-code__file"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>comparateur_carburants.py</span>
+                    <a class="md-code__lines" href="https://github.com/anis-nefikha/comparateur-carburants/blob/35f00361869e6662a67c14f612e42fe1ed959b1b/comparateur_carburants.py#L346-L351">L346–L351<span class="visually-hidden"> : formule de haversine, voir sur GitHub</span></a>
+                  </figcaption>
+                  <pre class="md-code__pre"><code><span class="code__line"><span class="code__ln" aria-hidden="true">346</span><span class="n">phi1</span><span class="p">,</span> <span class="n">phi2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lat1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lat2</span><span class="p">)</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">347</span><span class="n">delta_phi</span> <span class="o">=</span> <span class="n">phi2</span> <span class="o">-</span> <span class="n">phi1</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">348</span><span class="n">delta_lambda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lon2</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lon1</span><span class="p">)</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">349</span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">delta_phi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">350</span>     <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">delta_lambda</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">351</span><span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">RAYON_TERRE_KM</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></span></code></pre>
+                </figure>
+              </li>
+            <li class="md-step" data-reveal>
+                <h3 class="md-h3" id="etape-4"><span class="md-step__n" aria-hidden="true">04</span>Passage au format long</h3>
+                <p>Les données arrivent avec une colonne par carburant. Avec <code>pd.melt</code>, je passe à une ligne par couple (station, carburant) : filtrer et classer devient beaucoup plus simple.</p>
+                <figure class="md-code">
+                  <figcaption class="md-code__bar">
+                    <span class="md-code__file"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>comparateur_carburants.py</span>
+                    <a class="md-code__lines" href="https://github.com/anis-nefikha/comparateur-carburants/blob/35f00361869e6662a67c14f612e42fe1ed959b1b/comparateur_carburants.py#L397-L401">L397–L401<span class="visually-hidden"> : passage au format long, voir sur GitHub</span></a>
+                  </figcaption>
+                  <pre class="md-code__pre"><code><span class="code__line"><span class="code__ln" aria-hidden="true">397</span><span class="n">prix</span> <span class="o">=</span> <span class="n">donnees</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">398</span>    <span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">"id_station"</span><span class="p">,</span> <span class="n">COL_STATION</span><span class="p">,</span> <span class="s2">"distance_km"</span><span class="p">],</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">399</span>    <span class="n">value_vars</span><span class="o">=</span><span class="n">champs_prix</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="s2">"champ"</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="n">COL_PRIX</span><span class="p">,</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">400</span><span class="p">)</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">401</span><span class="n">prix</span><span class="p">[</span><span class="s2">"code"</span><span class="p">]</span> <span class="o">=</span> <span class="n">prix</span><span class="p">[</span><span class="s2">"champ"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"_prix"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span></span></code></pre>
+                </figure>
+              </li>
+            <li class="md-step" data-reveal>
+                <h3 class="md-h3" id="etape-5"><span class="md-step__n" aria-hidden="true">05</span>Contrôle de fiabilité</h3>
+                <p>Chaque prix est daté : moins de 10&nbsp;jours, il est fiable ; de 10 à 20&nbsp;jours, il est à vérifier ; au-delà de 20&nbsp;jours, il n'est plus représentatif.</p>
+                <figure class="md-code">
+                  <figcaption class="md-code__bar">
+                    <span class="md-code__file"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>comparateur_carburants.py</span>
+                    <a class="md-code__lines" href="https://github.com/anis-nefikha/comparateur-carburants/blob/35f00361869e6662a67c14f612e42fe1ed959b1b/comparateur_carburants.py#L422-L436">L422–L436<span class="visually-hidden"> : classement des prix selon leur ancienneté, voir sur GitHub</span></a>
+                  </figcaption>
+                  <pre class="md-code__pre"><code><span class="code__line"><span class="code__ln" aria-hidden="true">422</span><span class="c1"># np.select retient la PREMIÈRE condition vraie : l'ordre compte</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">423</span><span class="n">age_texte</span> <span class="o">=</span> <span class="n">age</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"Int64"</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">424</span><span class="n">conditions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">425</span>    <span class="n">age</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">426</span>    <span class="n">age</span> <span class="o">&gt;</span> <span class="n">SEUIL_NON_REPRESENTATIF_JOURS</span><span class="p">,</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">427</span>    <span class="n">age</span> <span class="o">&gt;=</span> <span class="n">SEUIL_FIABILITE_JOURS</span><span class="p">,</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">428</span><span class="p">]</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">429</span><span class="n">statuts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">430</span>    <span class="s2">"❌ DATE INCONNUE"</span><span class="p">,</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">431</span>    <span class="s2">"❌ PAS REPRÉSENTATIF (il y a "</span> <span class="o">+</span> <span class="n">age_texte</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">432</span>    <span class="o">+</span> <span class="s2">" j, probablement faux)"</span><span class="p">,</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">433</span>    <span class="s2">"⚠️ ATTENTION (il y a "</span> <span class="o">+</span> <span class="n">age_texte</span> <span class="o">+</span> <span class="s2">" j)"</span><span class="p">,</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">434</span><span class="p">]</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">435</span><span class="n">long</span><span class="p">[</span><span class="n">COL_STATUT</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="n">statuts</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">"✅ OK"</span><span class="p">)</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">436</span><span class="n">long</span><span class="p">[</span><span class="n">COL_FIABLE</span><span class="p">]</span> <span class="o">=</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">SEUIL_FIABILITE_JOURS</span>  <span class="c1"># NaN &lt; 10 -&gt; False</span></span></code></pre>
+                </figure>
+              </li>
+            <li class="md-step" data-reveal>
+                <h3 class="md-h3" id="etape-6"><span class="md-step__n" aria-hidden="true">06</span>Classement et rapport Excel</h3>
+                <p>Top 3 par carburant, trié par prix puis par distance : à prix égal, la station la plus proche passe devant. Le résultat s'affiche dans la console et part dans un rapport Excel mis en forme (prix fiables en vert, douteux en orange ou rouge), ouvert automatiquement.</p>
+                <figure class="md-code">
+                  <figcaption class="md-code__bar">
+                    <span class="md-code__file"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>comparateur_carburants.py</span>
+                    <a class="md-code__lines" href="https://github.com/anis-nefikha/comparateur-carburants/blob/35f00361869e6662a67c14f612e42fe1ed959b1b/comparateur_carburants.py#L482-L484">L482–L484<span class="visually-hidden"> : tri par prix puis par distance, voir sur GitHub</span></a>
+                  </figcaption>
+                  <pre class="md-code__pre"><code><span class="code__line"><span class="code__ln" aria-hidden="true">482</span><span class="n">top</span> <span class="o">=</span> <span class="p">(</span><span class="n">prix_carburant</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="n">COL_PRIX</span><span class="p">,</span> <span class="n">COL_DISTANCE</span><span class="p">])</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">483</span>       <span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">RANGS</span><span class="p">))</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span></span><span class="code__line"><span class="code__ln" aria-hidden="true">484</span><span class="n">top</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">COL_RANG</span><span class="p">,</span> <span class="n">RANGS</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">top</span><span class="p">)])</span></span></code></pre>
+                </figure><figure class="md-shot">
+                  <a class="md-shot__link" href="../assets/images/projets/carburant-rapport-excel.png">
+                    <img src="../assets/images/projets/carburant-rapport-excel.png" alt="Rapport Excel du 12/10/2026 autour d&#x27;Aubergenville (78410), rayon 25 km : le top 3 des prix fiables de chaque carburant, le premier surligné en vert, puis les prix douteux en orange (attention) ou en rouge (pas représentatif)." width="1490" height="674" loading="lazy" decoding="async">
+                    <span class="visually-hidden">(ouvrir en taille réelle)</span>
+                  </a>
+                  <figcaption>Le rapport Excel généré : prix fiables en vert, prix douteux en orange ou rouge.</figcaption>
+                </figure>
+              </li>
+          </ol>
+
+          <h2 data-reveal class="md-h2" id="choix-techniques">Choix techniques</h2>
+          <div data-reveal class="md-table-wrap">
+            <table class="md-table">
+              <thead><tr><th scope="col">Choix</th><th scope="col">Pourquoi</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Format long</strong> (<code>pd.melt</code>)</td><td>Une ligne par couple (station, carburant) : filtres et classements deviennent simples.</td></tr>
+                <tr><td><strong>Calcul vectorisé</strong></td><td>Pas de boucle sur les lignes : le code reste lisible et passe à plusieurs milliers de stations.</td></tr>
+                <tr><td><strong>Tri sur 2 critères</strong></td><td>Prix croissant, puis distance : à prix égal, la station la plus proche passe devant.</td></tr>
+                <tr><td><strong>Seuils en constantes</strong></td><td>10 et 20&nbsp;jours sont des choix d'analyste, faciles à ajuster en haut du fichier.</td></tr>
+                <tr><td><strong>Gestion des erreurs</strong></td><td><code>timeout</code> et <code>try/except</code> sur les appels réseau, saisies validées, fichier Excel déjà ouvert : le programme ne plante pas.</td></tr>
+                <tr><td><strong>Code typé et documenté</strong></td><td>Type hints, docstrings au format Google, respect de PEP&nbsp;8.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 data-reveal class="md-h2" id="apprentissages">Ce que j'ai appris</h2>
+          <ul data-reveal class="md-checklist">
+            <li><strong>Ne pas faire confiance aux données brutes.</strong> Une station arrivait 1<sup>re</sup> avec des prix vieux de plus de 50&nbsp;jours : contrôler la fraîcheur des données a changé tout le classement.</li>
+            <li><strong>Travailler avec une API REST paginée</strong> et gérer ses erreurs (délai dépassé, connexion perdue) sans que le programme s'arrête.</li>
+            <li><strong>Penser en tableaux plutôt qu'en boucles</strong> : format long avec pandas, calculs vectorisés avec numpy.</li>
+            <li><strong>Automatiser un livrable</strong> : un rapport Excel mis en forme avec openpyxl, prêt à être lu.</li>
+            <li><strong>Écrire du code maintenable</strong> : types, docstrings, PEP&nbsp;8 et paramètres regroupés en constantes.</li>
+          </ul>
+
+          <h2 data-reveal class="md-h2" id="limites">Limites et pistes d'amélioration</h2>
+          <ul data-reveal>
+            <li>Distance <strong>à vol d'oiseau</strong>, pas par la route.</li>
+            <li>Les prix sont <strong>déclarés</strong> par les stations : le programme peut signaler un prix douteux, pas le corriger.</li>
+            <li>Rayon limité à 30&nbsp;km (la pagination de l'API est plafonnée à 10&nbsp;000 résultats).</li>
+            <li>Pistes : analyse à l'échelle de la France, carte interactive des stations, application web avec Streamlit.</li>
+          </ul>
+
+          <h2 data-reveal class="md-h2" id="lancer">Lancer le projet</h2>
+          <pre data-reveal class="md-pre"><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/anis-nefikha/comparateur-carburants.git
+<span class="nb">cd</span><span class="w"> </span>comparateur-carburants
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+python<span class="w"> </span>comparateur_carburants.py</code></pre>
+          <p data-reveal class="md-sources">Sources : <a href="https://data.economie.gouv.fr/explore/dataset/prix-des-carburants-en-france-flux-instantane-v2/">prix des carburants en France, flux instantané (v2)</a>, ministère de l'Économie · <a href="https://geoservices.ign.fr/documentation/services/services-geoplateforme/geocodage">service de géocodage de la Géoplateforme</a>, IGN.</p>
+
+        </div>
+        <footer class="readme__foot">
+          <a class="button button--secondary" href="https://github.com/anis-nefikha/comparateur-carburants">
+            <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
+            Voir le code sur GitHub
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </footer>
+      </article>
+    </div>
+
+    <div class="container next-project-wrap">
+      <a class="next-project" href="dashboard-adidas.html" data-reveal>
+        <span class="project-logo" aria-hidden="true"><svg class="icon"><use href="#i-dashboard"/></svg></span>
+        <span class="next-project__text">
+          <span class="next-project__label">Autre projet</span>
+          <span class="next-project__title">Excel Dashboard Adidas</span>
+        </span>
+        <svg class="icon next-project__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© 2026 Anis Nefikha</div>
+  </footer>
+
+</body>
+</html>
