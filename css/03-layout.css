@@ -308,7 +308,7 @@
 
   /* Haut réduit : le journal qualité du hero reste au-dessus de la ligne de flottaison */
   .section--accueil {
-    padding-block: var(--space-6) var(--space-8);
+    padding-block: var(--space-5) var(--space-8);
   }
 
   .project-list > li {

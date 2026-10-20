@@ -197,8 +197,14 @@
 }
 
 @media (min-width: 64em) {
+  /* Desktop : signature plus compacte pour laisser le journal qualité dans le premier écran */
+  .signature {
+    padding: var(--space-4) var(--space-5) var(--space-5);
+  }
+
   .signature__card {
     width: 76%;
+    padding: var(--space-5);
   }
 
   /* Desktop : la carte est plus étroite, le portrait peut déborder davantage
