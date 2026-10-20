@@ -21,12 +21,16 @@
   --color-grid: rgba(141, 180, 232, 0.06); /* trame de la signature */
   --color-glow: rgba(31, 58, 95, 0.6);     /* halo bleu derrière le hero */
   --color-warning: #E3B98A;     /* chaînes de code et alertes « Attention » : 10.6:1 sur le fond */
+  --color-ok: #3FBF8A;          /* contrôle validé (journal qualité) : 7.4:1 sur le fond */
+  --color-paper: #FFFFFF;       /* carte blanche de la signature, seule surface claire du site */
+  --color-terminal: #0B1422;    /* fond du journal de contrôle qualité */
   --header-bg: rgba(10, 15, 24, 0.88);
 
   /* Polices (les « Fallback » limitent le décalage au chargement, voir 02-base.css) */
   --font-heading: "Space Grotesk", "Space Grotesk Fallback", system-ui, sans-serif;
   --font-body: "Inter", "Inter Fallback", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, monospace;
+  --font-hand: "Caveat", "Segoe Print", cursive; /* annotation manuscrite de la signature uniquement */
 
   /* Échelle typographique */
   --text-h1: clamp(3rem, 8vw, 6.5rem);
@@ -69,8 +73,8 @@
 
   /* Mouvement */
   --duration-hover: 200ms;
-  --duration-reveal: 700ms;
-  --reveal-offset: 24px;
+  --duration-reveal: 600ms;
+  --reveal-offset: 14px;        /* apparitions discrètes : le moment fort reste la signature */
   --reveal-step: 90ms;          /* décalage entre deux éléments qui apparaissent ensemble */
   --ease: cubic-bezier(0.2, 0, 0, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);

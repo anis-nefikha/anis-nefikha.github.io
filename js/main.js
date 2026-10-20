@@ -96,6 +96,22 @@
     observer.observe(element);
   });
 
+  /* Journal de contrôle qualité : les lignes s'affichent une à une, une seule
+     fois, dès que le haut du panneau passe au-dessus de 80 % de l'écran
+     (voir .log.is-run dans le CSS). Pas de seuil en pourcentage du panneau :
+     sur petit écran ou zoomé, il peut être plus haut que la fenêtre. */
+  const journal = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      journal.unobserve(entry.target);
+      entry.target.classList.add('is-run');
+    });
+  }, { rootMargin: '0px 0px -20% 0px', threshold: 0 });
+
+  document.querySelectorAll('[data-log]').forEach(function (element) {
+    journal.observe(element);
+  });
+
   // Signale au filet de sécurité du <head> que les apparitions sont prises en charge
   root.classList.add('reveal-ready');
 })();

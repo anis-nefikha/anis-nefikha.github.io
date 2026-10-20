@@ -71,67 +71,401 @@
   }
 }
 
-/* --- Bloc « rapport » (signature du hero) -------------------------------- */
-/* <dl class="hero__report report"> avec des <div class="report__row"> */
-.report {
+/* --- Signature du hero : la bannière LinkedIn, recréée en HTML ----------- */
+/* Panneau bleu marine, logos des outils, carte blanche avec le nom (h1),
+   portrait, sous-titre espacé et annotation manuscrite vers les projets. */
+.signature {
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr;
-  border-top: 1px solid var(--color-border);
-  font-family: var(--font-mono);
+  justify-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-3) var(--space-5);
+  background-color: var(--color-navy);
+  background-image:
+    radial-gradient(ellipse 70% 90% at 50% 0%, rgba(141, 180, 232, 0.16), transparent 70%),
+    repeating-linear-gradient(to right, var(--color-grid) 0, var(--color-grid) 1px, transparent 1px, transparent var(--grid-step));
+  border: 1px solid var(--color-border-strong);
+  border-radius: 20px;
+  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.8);
 }
 
-.report__row {
+.signature__tools {
   display: flex;
-  flex-direction: column-reverse; /* valeur en grand au-dessus, étiquette dessous */
-  justify-content: flex-end;      /* valeurs alignées en haut quand les étiquettes passent sur 2 lignes */
-  gap: var(--space-1);
-  padding: var(--space-3) 0;
-  border-bottom: 1px solid var(--color-border);
+  gap: var(--space-3);
+  justify-self: start;
+  padding: 0;
+  list-style: none;
 }
 
-.report__label {
-  font-size: var(--text-label-sm);
-  letter-spacing: var(--tracking-label);
+.signature__tools svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+/* VBA au trait, comme sur la bannière */
+.signature__vba {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.signature__vba text {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 400; /* seule graisse chargée : pas de faux gras */
+  fill: var(--color-text);
+  stroke: none;
+}
+
+.signature__card {
+  position: relative;
+  width: 100%;
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+  background-color: var(--color-paper);
+  border-radius: 14px;
+  box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.65);
+}
+
+/* Le nom en capitales très espacées. padding-left compense l'espace laissé
+   après la dernière lettre, pour que le nom reste centré. */
+.signature__name {
+  padding-left: 0.28em;
+  font-size: clamp(1.75rem, 5vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--color-muted);
+  text-wrap: balance;
+  color: var(--color-bg);
 }
 
-.report__value {
-  margin: 0;
-  font-size: 1.75rem;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+/* Portrait : posé sur le coin bas gauche de la carte */
+.signature__photo {
+  position: absolute;
+  bottom: -28px;
+  left: var(--space-2);
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border: 3px solid var(--color-navy);
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+.signature__role {
+  max-width: none;
+  margin-top: var(--space-3); /* laisse passer le portrait sur mobile */
+  padding-left: 0.3em;
+  font-size: var(--text-label-sm);
+  font-weight: 500;
+  line-height: 1.8;
+  letter-spacing: 0.3em;
+  text-align: center;
+  text-transform: uppercase;
   color: var(--color-text);
 }
 
-/* Tablette : les trois faits côte à côte, sous le titre */
-@media (min-width: 48em) and (max-width: 63.99em) {
-  .report {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    border-bottom: 1px solid var(--color-border);
+/* Annotation manuscrite : desktop uniquement, dans la marge droite de la carte */
+.signature__note {
+  display: none;
+}
+
+@media (min-width: 48em) {
+  .signature {
+    padding: var(--space-5) var(--space-5) var(--space-6);
   }
 
-  .report__row {
-    padding-inline: var(--space-3);
-    border-bottom: 0;
-    border-left: 1px solid var(--color-border);
+  .signature__card {
+    padding: var(--space-6) var(--space-5);
   }
 
-  .report__row:first-child {
-    padding-left: 0;
-    border-left: 0;
+  /* Tablette : le portrait déborde à gauche sans sortir du panneau */
+  .signature__photo {
+    bottom: -36px;
+    left: calc(-1 * var(--space-4));
+    width: 104px;
+    height: 104px;
+    border-width: 4px;
+  }
+
+  .signature__role {
+    font-size: var(--text-label);
   }
 }
 
-/* --- Bannière du hero (reprise de LinkedIn) ------------------------------ */
-.banner-img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1584 / 396;
-  object-fit: cover;
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+@media (min-width: 64em) {
+  /* Desktop : signature plus compacte pour laisser le journal qualité dans le premier écran */
+  .signature {
+    padding: var(--space-4) var(--space-5) var(--space-5);
+  }
+
+  .signature__card {
+    width: 76%;
+    padding: var(--space-5);
+  }
+
+  /* Desktop : la carte est plus étroite, le portrait peut déborder davantage
+     et le sous-titre remonter sans le toucher */
+  .signature__photo {
+    left: -40px;
+  }
+
+  .signature__role {
+    margin-top: 0;
+  }
+
+  .signature__note {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-family: var(--font-hand);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  /* Flèche à main levée : descend en S vers le journal qualité */
+  .signature__note svg {
+    width: 2.75rem;
+    height: 4.5rem;
+    margin: var(--space-1) var(--space-5) 0 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform var(--duration-hover) var(--ease);
+  }
+
+  /* Survol et focus clavier : soulignement (pas d'orange sur le bleu marine, voir 01-tokens.css) */
+  .signature__note:hover span,
+  .signature__note:focus-visible span {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.15em;
+  }
+
+  .signature__note:hover svg,
+  .signature__note:focus-visible svg {
+    transform: translateY(3px);
+  }
+}
+
+/* Moment fort du chargement (le seul de la page) : la carte se pose, le nom
+   s'ouvre depuis le centre, le portrait et les logos arrivent, la flèche se dessine. */
+@media (prefers-reduced-motion: no-preference) {
+  .signature__card {
+    animation: signature-card 900ms var(--ease-out) 100ms both;
+  }
+
+  /* backwards : masqué pendant le délai, aucun clip-path résiduel après l'animation */
+  .signature__name {
+    animation: signature-name 900ms var(--ease-out) 300ms backwards;
+  }
+
+  .signature__photo {
+    animation: signature-pop 500ms var(--ease-out) 700ms both;
+  }
+
+  .signature__role,
+  .signature__tools li {
+    animation: signature-rise 600ms var(--ease-out) 650ms both;
+  }
+
+  .signature__tools li:nth-child(1) { animation-delay: 250ms; }
+  .signature__tools li:nth-child(2) { animation-delay: 320ms; }
+  .signature__tools li:nth-child(3) { animation-delay: 390ms; }
+  .signature__tools li:nth-child(4) { animation-delay: 460ms; }
+
+  .signature__note span {
+    animation: signature-rise 500ms var(--ease-out) 950ms both;
+  }
+
+  .signature__note path {
+    stroke-dasharray: 1;
+    animation: signature-draw 650ms ease-in-out 1150ms both;
+  }
+}
+
+@keyframes signature-card {
+  from { opacity: 0; transform: translateY(24px) rotate(-1.5deg) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Sans opacité : le h1 reste candidat au LCP dès le premier affichage */
+@keyframes signature-name {
+  from { clip-path: inset(0 50%); }
+  to { clip-path: inset(0 0); }
+}
+
+@keyframes signature-pop {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes signature-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes signature-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* --- Fil rouge : journal de contrôle qualité (colonne droite du hero) ------ */
+.audit__title {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  text-wrap: balance;
+}
+
+.audit__lead {
+  max-width: 44ch;
+  margin-block: var(--space-2) var(--space-4);
+  color: var(--color-muted);
+}
+
+.log {
+  overflow: hidden;
+  background-color: var(--color-terminal);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-md);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
+}
+
+.log__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 10px var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-label-sm);
+  color: var(--color-muted);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.log__dots {
+  display: flex;
+  gap: 6px;
+}
+
+.log__dots i {
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-border-strong);
+  border-radius: 50%;
+}
+
+.log__lines {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-3);
+  list-style: none;
+}
+
+.log__line {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: var(--space-3);
+  max-width: none;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.log__line:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.log__status {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.1em;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  border: 1px solid;
+  border-radius: 6px;
+}
+
+.log__status--ok {
+  color: var(--color-ok);
+  background-color: rgba(63, 191, 138, 0.12);
+}
+
+.log__status--warn {
+  color: var(--color-warning);
+  background-color: rgba(227, 185, 138, 0.1);
+}
+
+.log__check {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.log__fix {
+  margin-top: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.log__fix::before {
+  content: "→ ";
+  content: "→ " / ""; /* flèche décorative, non lue par les lecteurs d'écran */
+  color: var(--color-blue);
+}
+
+.log__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-target);
+  margin-top: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-label-sm);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+@media (min-width: 48em) {
+  .log__lines {
+    padding: var(--space-5) var(--space-4);
+  }
+}
+
+/* Les contrôles « s'exécutent » un par un quand le journal entre dans l'écran
+   (main.js ajoute .is-run). Mouvement réduit ou sans JS : tout est affiché. */
+.reveal-on .log:not(.is-run) .log__line {
+  opacity: 0;
+}
+
+/* backwards : aucun clip-path résiduel qui couperait le contour de focus des liens */
+.reveal-on .log.is-run .log__line {
+  animation: log-line 520ms var(--ease-out) backwards;
+  animation-delay: calc(var(--i, 0) * 450ms + 200ms);
+}
+
+.reveal-on .log.is-run .log__status {
+  animation: signature-pop 400ms var(--ease-out) backwards;
+  animation-delay: calc(var(--i, 0) * 450ms + 450ms);
+}
+
+@keyframes log-line {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); }
 }
 
 /* --- Cartes projets : chaque carte ouvre la page du projet --------------- */
@@ -601,6 +935,13 @@
   }
 }
 
+/* --- À propos : présentation courte avant les centres d'intérêt ------------ */
+.about__text {
+  max-width: 60ch;
+  font-size: 1.125rem;
+  color: var(--color-text);
+}
+
 /* --- Contact ------------------------------------------------------------- */
 .contact {
   margin-top: var(--space-6);
@@ -752,6 +1093,7 @@
 
 /* Hero : recherche de stage, sous l'accroche */
 .hero__goal {
+  margin-top: var(--space-4);
   color: var(--color-muted);
 }
 
@@ -850,7 +1192,8 @@
 }
 
 @media print {
-  .reveal-on [data-reveal]:not(.is-visible) {
+  .reveal-on [data-reveal]:not(.is-visible),
+  .reveal-on .log:not(.is-run) .log__line {
     opacity: 1;
     transform: none;
   }

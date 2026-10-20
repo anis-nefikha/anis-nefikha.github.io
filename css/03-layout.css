@@ -185,7 +185,6 @@
 }
 
 /* Ligne d'en-tête : numéro mono accent + titre, puis filet 1px pleine largeur */
-.section-head,
 .section-title {
   display: flex;
   align-items: baseline;
@@ -193,16 +192,6 @@
   padding-bottom: var(--space-4);
   margin-bottom: var(--space-6);
   border-bottom: 1px solid var(--color-border);
-}
-
-/* Le titre « 01 Accueil » est une étiquette : le grand titre du hero est le h1 */
-.section-head {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--color-muted);
-  max-width: none;
 }
 
 .section-number {
@@ -243,41 +232,14 @@
   row-gap: var(--space-6);
 }
 
-.hero__grid .section-head {
-  margin-bottom: var(--space-4);
+/* La signature est suivie du texte : un peu plus d'air que le gap de la grille */
+.hero__grid > .signature {
+  margin-bottom: var(--space-3);
 }
 
-.hero__title {
-  max-width: 12ch;
-}
-
-/* Bannière : reprise de LinkedIn, en haut du hero */
-.hero__banner {
-  margin-bottom: 0;
-}
-
-/* Portrait : rond, posé à cheval sur le bas de la bannière */
-.hero__photo {
-  position: relative;
-  z-index: 1;
-  width: 72px;
-  height: 72px;
-  /* Ne déborde que d'un tiers sur la bannière pour ne pas cacher le nom */
-  margin-top: calc(-24px - var(--space-4));
-  margin-left: var(--space-3);
-  object-fit: cover;
-  border: 4px solid var(--color-navy);
-  border-radius: 50%;
-  background-color: var(--color-surface);
-  box-shadow: 0 0 0 1px var(--color-border-strong), 0 12px 32px rgba(0, 0, 0, 0.45);
-}
-
-.hero__subtitle {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--color-muted);
+/* Mobile et tablette : le journal qualité passe sous les boutons */
+.hero__audit {
+  margin-top: var(--space-5);
 }
 
 /* --- Pages projets -------------------------------------------------------- */
@@ -344,19 +306,13 @@
     padding-block: var(--space-8);
   }
 
+  /* Haut réduit : le journal qualité du hero reste au-dessus de la ligne de flottaison */
   .section--accueil {
-    padding-block: var(--space-7) var(--space-8);
+    padding-block: var(--space-5) var(--space-8);
   }
 
   .project-list > li {
     grid-column: span 6;
-  }
-
-  .hero__photo {
-    width: 104px;
-    height: 104px;
-    margin-top: calc(-40px - var(--space-4));
-    margin-left: var(--space-5);
   }
 
   /* Un seul projet : la carte prend plus de place pour ne pas laisser un vide */
@@ -391,36 +347,16 @@
     grid-row: 1;
   }
 
-  /* Hero : titre pleine largeur, texte à gauche, bloc « rapport » à droite */
-  .hero__grid > * {
-    grid-column: 1 / 8;
-  }
-
-  .hero__grid > .section-head {
-    grid-column: 1 / -1;
-  }
-
-  .hero__grid > .hero__title {
-    grid-column: 1 / 9;
-  }
-
-  .hero__grid > .hero__banner {
-    grid-column: 1 / -1;
-  }
-
-  /* Rangées : 1 en-tête, 2 bannière, 3 portrait, 4 titre, 5+ texte et boutons */
-  .hero__grid > .hero__report {
-    grid-column: 9 / -1;
-    grid-row: 4 / span 4;
+  /* Hero : signature pleine largeur, texte à gauche, journal qualité à droite
+     (sous la flèche « Ma méthode », visible sans défiler) */
+  .hero__grid > .hero__text {
+    grid-column: 1 / 6;
     align-self: start;
   }
 
-  .hero__grid > .hero__photo {
-    grid-column: 1 / -1;
-    width: 136px;
-    height: 136px;
-    margin-top: calc(-68px - var(--space-4));
-    margin-left: var(--space-5);
+  .hero__grid > .hero__audit {
+    grid-column: 7 / -1;
+    margin-top: 0;
   }
 
   /* Compétences à gauche, timeline à droite */

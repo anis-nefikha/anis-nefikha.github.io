@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Anis Nefikha — Data &amp; Python</title>
-  <meta name="description" content="Portfolio d'Anis Nefikha, étudiant en BUT Science des Données à l'IUT de Lille. Projets data et Python, à la recherche d'un stage d'un mois en data, de juillet à août.">
+  <meta name="description" content="Portfolio d'Anis Nefikha, étudiant en BUT Science des Données à l'IUT de Lille. Projets data et Python, à la recherche d'un stage d'un mois en data, en juillet-août 2027.">
   <meta name="theme-color" content="#0A0F18">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Anis Nefikha — Data &amp; Python">
-  <meta property="og:description" content="Étudiant en BUT Science des Données (IUT de Lille), à la recherche d'un stage d'un mois en data, de juillet à août. Projets, compétences et contact.">
+  <meta property="og:description" content="Étudiant en BUT Science des Données (IUT de Lille), à la recherche d'un stage d'un mois en data, en juillet-août 2027. Projets, compétences et contact.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://anis-nefikha.github.io/">
   <meta property="og:image" content="https://anis-nefikha.github.io/assets/images/apercu-partage.jpg">
@@ -24,7 +24,9 @@
   <!-- Polices Google : uniquement les graisses utilisées, font-display: swap -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Space+Grotesk:wght@600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Space+Grotesk:wght@600;700&display=swap">
+  <!-- Écriture manuscrite de la bannière : seulement les lettres de « Ma méthode », bloquante sur desktop uniquement -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&text=Ma%20m%C3%A9thode&display=swap" media="(min-width: 64em)">
 
   <!-- Feuilles de style : l'ordre compte (tokens → base → layout → composants) -->
   <link rel="stylesheet" href="css/01-tokens.css">
@@ -98,43 +100,82 @@
          ============================================================ -->
     <section class="section section--accueil" id="accueil" aria-labelledby="accueil-titre">
       <div class="container grid hero__grid">
-        <p class="section-head" aria-hidden="true" data-reveal><span class="section-number">01</span> Accueil</p>
+        <!-- Signature : la bannière LinkedIn recréée en HTML (nom = h1, net à toutes les tailles).
+             Seul moment animé au chargement, voir « Signature du hero » dans 04-components.css -->
+        <div class="signature">
+          <ul class="signature__tools" aria-label="Outils">
+            <li><svg viewBox="0 0 32 32" focusable="false" aria-hidden="true"><defs><linearGradient id="sigExcel" x1="4.494" x2="13.832" y1="-2092.086" y2="-2075.914" gradientTransform="translate(0 2100)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#18884f"/><stop offset=".5" stop-color="#117e43"/><stop offset="1" stop-color="#0b6631"/></linearGradient></defs><path fill="#185c37" d="M19.581 15.35L8.512 13.4v14.409A1.19 1.19 0 0 0 9.705 29h19.1A1.19 1.19 0 0 0 30 27.809V22.5Z"/><path fill="#21a366" d="M19.581 3H9.705a1.19 1.19 0 0 0-1.193 1.191V9.5L19.581 16l5.861 1.95L30 16V9.5Z"/><path fill="#107c41" d="M8.512 9.5h11.069V16H8.512Z"/><path fill="url(#sigExcel)" d="M3.194 8.85h11.938a1.193 1.193 0 0 1 1.194 1.191v11.918a1.193 1.193 0 0 1-1.194 1.191H3.194A1.19 1.19 0 0 1 2 21.959V10.041A1.19 1.19 0 0 1 3.194 8.85"/><path fill="#fff" d="m5.7 19.873l2.511-3.884l-2.3-3.862h1.847L9.013 14.6c.116.234.2.408.238.524h.017q.123-.281.26-.546l1.342-2.447h1.7l-2.359 3.84l2.419 3.905h-1.809l-1.45-2.711A2.4 2.4 0 0 1 9.2 16.8h-.024a1.7 1.7 0 0 1-.168.351l-1.493 2.722Z"/><path fill="#33c481" d="M28.806 3h-9.225v6.5H30V4.191A1.19 1.19 0 0 0 28.806 3"/><path fill="#107c41" d="M19.581 16H30v6.5H19.581Z"/></svg><span class="visually-hidden">Excel</span></li>
+            <li><svg viewBox="0 0 32 32" focusable="false" aria-hidden="true"><path fill="#ffda44" d="M8.562 15.256A21.2 21.2 0 0 0 16 16.449a21.2 21.2 0 0 0 7.438-1.194c1.864-.727 2.525-1.535 2.525-2V9.7a10.4 10.4 0 0 1-2.084 1.076A22.3 22.3 0 0 1 16 12.078a22.4 22.4 0 0 1-7.879-1.3A10.3 10.3 0 0 1 6.037 9.7v3.55c0 .474.663 1.278 2.525 2.006m0 6.705a15.6 15.6 0 0 0 2.6.741a25 25 0 0 0 4.838.453a25 25 0 0 0 4.838-.452a15.6 15.6 0 0 0 2.6-.741c1.864-.727 2.525-1.535 2.525-2v-3.39a10.7 10.7 0 0 1-1.692.825A23.5 23.5 0 0 1 16 18.74a23.5 23.5 0 0 1-8.271-1.348a11 11 0 0 1-1.692-.825v3.393c0 .466.663 1.271 2.525 2.001M16 30c5.5 0 9.963-1.744 9.963-3.894v-2.837a10.5 10.5 0 0 1-1.535.762l-.157.063A23.5 23.5 0 0 1 16 25.445a23.4 23.4 0 0 1-8.271-1.351l-.157-.063a10.5 10.5 0 0 1-1.535-.762v2.837C6.037 28.256 10.5 30 16 30"/><ellipse cx="16" cy="5.894" fill="#ffda44" rx="9.963" ry="3.894"/></svg><span class="visually-hidden">SQL</span></li>
+            <li><svg viewBox="0 0 256 255" focusable="false" aria-hidden="true"><defs><linearGradient id="sigPython0" x1="12.959%" x2="79.639%" y1="12.039%" y2="78.201%"><stop offset="0%" stop-color="#387EB8"/><stop offset="100%" stop-color="#366994"/></linearGradient><linearGradient id="sigPython1" x1="19.128%" x2="90.742%" y1="20.579%" y2="88.429%"><stop offset="0%" stop-color="#FFE052"/><stop offset="100%" stop-color="#FFC331"/></linearGradient></defs><path fill="url(#sigPython0)" d="M126.916.072c-64.832 0-60.784 28.115-60.784 28.115l.072 29.128h61.868v8.745H41.631S.145 61.355.145 126.77c0 65.417 36.21 63.097 36.21 63.097h21.61v-30.356s-1.165-36.21 35.632-36.21h61.362s34.475.557 34.475-33.319V33.97S194.670.072 126.916.072M92.802 19.66a11.12 11.12 0 0 1 11.13 11.13a11.12 11.12 0 0 1-11.13 11.13a11.12 11.12 0 0 1-11.13-11.13a11.12 11.12 0 0 1 11.13-11.13"/><path fill="url(#sigPython1)" d="M128.757 254.126c64.832 0 60.784-28.115 60.784-28.115l-.072-29.127H127.6v-8.745h86.441s41.486 4.705 41.486-60.712c0-65.416-36.21-63.096-36.21-63.096h-21.61v30.355s1.165 36.21-35.632 36.21h-61.362s-34.475-.557-34.475 33.32v56.013s-5.235 33.897 62.518 33.897m34.114-19.586a11.12 11.12 0 0 1-11.13-11.13a11.12 11.12 0 0 1 11.13-11.131a11.12 11.12 0 0 1 11.13 11.13a11.12 11.12 0 0 1-11.13 11.13"/></svg><span class="visually-hidden">Python</span></li>
+            <li><svg class="signature__vba" viewBox="0 0 32 32" focusable="false" aria-hidden="true"><path d="M9 9.5l3-2.5 3 2.5-3 2.5zM17 9.5l3-2.5 3 2.5-3 2.5zM13 6l3-2.5L19 6l-3 2.5z"/><rect x="3" y="13" width="26" height="15" rx="2.5"/><text x="16" y="24.5" text-anchor="middle">VBA</text></svg><span class="visually-hidden">VBA</span></li>
+          </ul>
 
-        <!-- Bannière reprise de LinkedIn (le nom et le titre sont déjà dans le h1 et le sous-titre) -->
-        <img class="hero__banner banner-img" data-reveal src="assets/images/banniere-linkedin.jpg" alt="" width="1584" height="396">
+          <div class="signature__card">
+            <h1 id="accueil-titre" class="signature__name">Anis Nefikha</h1>
+            <img class="signature__photo" src="assets/images/anis-nefikha.jpg" alt="Portrait d'Anis Nefikha" width="260" height="260">
+          </div>
 
-        <img class="hero__photo" data-reveal src="assets/images/anis-nefikha.jpg" alt="Portrait d'Anis Nefikha" width="260" height="260">
+          <p class="signature__role">Étudiant data analyst <span aria-hidden="true">•</span> BUT Science des Données</p>
 
-        <h1 id="accueil-titre" class="hero__title" data-reveal>Anis Nefikha</h1>
-        <p class="section__subtitle hero__subtitle" data-reveal>Étudiant en BUT Science des Données</p>
-
-        <p class="hero__intro" data-reveal>Étudiant en Science des Données et ancien gestionnaire comptable, je combine l'analyse technique et la rigueur financière pour transformer la donnée brute en leviers de décision stratégiques.</p>
-
-        <p class="hero__goal" data-reveal>Je recherche un <strong>stage d'un mois, de juillet à août</strong>, pour mettre un pied dans le monde de la data. Je me forme dès maintenant pour être utile dès mon arrivée.</p>
-
-        <div class="button-group" data-reveal>
-          <a class="button button--primary" href="#projets">Voir mes projets</a>
-          <a class="button button--secondary" href="assets/cv/cv-anis-nefikha.pdf">
-            <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
-            Télécharger mon CV
+          <!-- Annotation manuscrite de la bannière (desktop uniquement) : la flèche désigne le journal
+               qualité, juste en dessous. Placée après le h1 pour l'ordre de lecture au clavier. -->
+          <a class="signature__note" href="#verification">
+            <span>Ma méthode</span>
+            <svg viewBox="0 0 56 92" focusable="false" aria-hidden="true"><path pathLength="1" d="M30 4C44 20 44 38 30 50S22 70 26 86M29 75L26 86L18 78"/></svg>
           </a>
         </div>
 
-        <!-- Bloc « rapport » : 3 faits clés -->
-        <dl class="hero__report report" data-reveal>
-          <div class="report__row">
-            <dt class="report__label">IUT de Lille · 1re année</dt>
-            <dd class="report__value">BUT SD</dd>
+        <div class="hero__text">
+          <p class="hero__intro" data-reveal>Étudiant en Science des Données, j'ai passé deux ans en alternance comme collaborateur comptable. J'y contrôlais notamment les données de TVA de 15 dossiers clients. J'en garde un réflexe&nbsp;: vérifier les chiffres avant de m'en servir.</p>
+
+          <p class="hero__goal" data-reveal>Je recherche un <strong>stage d'un mois en juillet-août 2027</strong> pour mettre un pied dans le monde de la data, et je continue de me former en Python et en SQL d'ici là.</p>
+
+          <div class="button-group" data-reveal>
+            <a class="button button--primary" href="#projets">Voir mes projets</a>
+            <a class="button button--secondary" href="assets/cv/cv-anis-nefikha.pdf">
+              <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
+              Télécharger mon CV
+            </a>
           </div>
-          <div class="report__row">
-            <dt class="report__label">Comptabilité et gestion · obtenu en alternance</dt>
-            <dd class="report__value">BTS CG</dd>
-          </div>
-          <div class="report__row">
-            <dt class="report__label">Recherché · 1 mois de juillet à août</dt>
-            <dd class="report__value">Stage</dd>
-          </div>
-        </dl>
+        </div>
+
+        <!-- Fil rouge : contrôle qualité (3 anomalies réelles, tirées des pages projets).
+             Placé dans le hero pour être vu sans défiler. Les lignes s'affichent une à une
+             quand le journal entre dans l'écran (main.js). -->
+        <div class="hero__audit" id="verification">
+          <h2 class="audit__title" data-reveal>Je vérifie avant d'analyser.</h2>
+          <p class="audit__lead" data-reveal>Trois anomalies trouvées dans mes projets, et ce que j'en ai fait.</p>
+
+        <figure class="log" data-log>
+          <figcaption class="log__bar"><span class="log__dots" aria-hidden="true"><i></i><i></i><i></i></span>controle_qualite.log</figcaption>
+          <ol class="log__lines">
+            <li class="log__line" style="--i: 0">
+              <span class="log__status log__status--ok" aria-hidden="true">✓</span>
+              <div class="log__text">
+                <p class="log__check"><span class="visually-hidden">Corrigé : </span>Ventes Adidas : chiffre d'affaires faux d'un facteur 10 sur une partie des lignes</p>
+                <p class="log__fix">Recalculé à partir du prix unitaire × quantité vendue</p>
+                <a class="log__link" href="projets/dashboard-adidas.html#etape-2">Voir l'audit Adidas</a>
+              </div>
+            </li>
+            <li class="log__line" style="--i: 1">
+              <span class="log__status log__status--warn" aria-hidden="true">!</span>
+              <div class="log__text">
+                <p class="log__check"><span class="visually-hidden">Signalé : </span>Périmètre : 9 États en 2020 contre 46 en 2021</p>
+                <p class="log__fix">Évolution brute d'une année sur l'autre signalée comme non comparable</p>
+                <a class="log__link" href="projets/dashboard-adidas.html#etape-5">Voir l'analyse</a>
+              </div>
+            </li>
+            <li class="log__line" style="--i: 2">
+              <span class="log__status log__status--warn" aria-hidden="true">!</span>
+              <div class="log__text">
+                <p class="log__check"><span class="visually-hidden">Signalé : </span>Prix des carburants datés de plus de 10 jours</p>
+                <p class="log__fix">Marqués douteux et séparés des prix fiables avant le classement</p>
+                <a class="log__link" href="projets/comparateur-carburants.html#etape-5">Voir le comparateur</a>
+              </div>
+            </li>
+          </ol>
+        </figure>
+        </div>
       </div>
     </section>
 
@@ -143,7 +184,7 @@
          ============================================================ -->
     <section class="section section--projets" id="projets" aria-labelledby="projets-titre">
       <div class="container">
-        <h2 id="projets-titre" class="section-title" data-reveal><span class="section-number" aria-hidden="true">02</span>Projets</h2>
+        <h2 id="projets-titre" class="section-title" data-reveal><span class="section-number" aria-hidden="true">01</span>Projets</h2>
 
         <!-- Chaque carte ouvre la page du projet (README complet), générée par projets.py -->
         <ul class="project-list grid">
@@ -186,8 +227,7 @@
                   <span class="project-logo" aria-hidden="true"><svg class="icon"><use href="#i-fuel"/></svg></span>
                   <p class="project-card__kicker">Projet 01 · Python · pandas · API</p>
                 </div>
-                <h3 class="project-card__title"><a class="project-card__link" href="projets/comparateur-carburants.html">Carburant Comparateur</a></h3>
-                <p class="project-card__subtitle">Comparateur de prix des carburants</p>
+                <h3 class="project-card__title"><a class="project-card__link" href="projets/comparateur-carburants.html">Comparateur de prix des carburants</a></h3>
                 <p class="project-card__summary">Outil Python qui trouve les stations-service les moins chères autour d'une ville, à partir des données ouvertes, et qui vérifie que les prix affichés sont encore à jour.</p>
                 <span class="project-card__cta" aria-hidden="true">Lire le README <svg class="icon"><use href="#i-arrow-right"/></svg></span>
               </div>
@@ -232,8 +272,7 @@
                   <span class="project-logo" aria-hidden="true"><svg class="icon"><use href="#i-dashboard"/></svg></span>
                   <p class="project-card__kicker">Projet 02 · Excel · TCD · Dashboard</p>
                 </div>
-                <h3 class="project-card__title"><a class="project-card__link" href="projets/dashboard-adidas.html">Excel Dashboard Adidas</a></h3>
-                <p class="project-card__subtitle">Analyse des ventes Adidas aux États-Unis</p>
+                <h3 class="project-card__title"><a class="project-card__link" href="projets/dashboard-adidas.html">Analyse des ventes Adidas aux États-Unis</a></h3>
                 <p class="project-card__summary">Tableau de bord interactif construit dans Excel à partir de 9&nbsp;648 ventes Adidas aux États-Unis, avec un audit de la qualité des données avant toute analyse.</p>
                 <span class="project-card__cta" aria-hidden="true">Lire le README <svg class="icon"><use href="#i-arrow-right"/></svg></span>
               </div>
@@ -248,7 +287,7 @@
          ============================================================ -->
     <section class="section section--band section--competences" id="competences" aria-labelledby="competences-titre">
       <div class="container grid competences__grid">
-        <h2 id="competences-titre" class="section-title" data-reveal><span class="section-number" aria-hidden="true">03</span>Compétences et parcours</h2>
+        <h2 id="competences-titre" class="section-title" data-reveal><span class="section-number" aria-hidden="true">02</span>Compétences et parcours</h2>
 
         <ul class="skill-groups">
           <li class="skill-group">
@@ -263,7 +302,7 @@
             <ul class="skill-group__list">
               <li data-reveal><span class="skill-logo" aria-hidden="true"><svg class="skill-logo__img" focusable="false" viewBox="0 0 32 32"><defs><linearGradient id="logoExcel0" x1="4.494" x2="13.832" y1="-2092.086" y2="-2075.914" gradientTransform="translate(0 2100)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#18884f"/><stop offset=".5" stop-color="#117e43"/><stop offset="1" stop-color="#0b6631"/></linearGradient></defs><path fill="#185c37" d="M19.581 15.35L8.512 13.4v14.409A1.19 1.19 0 0 0 9.705 29h19.1A1.19 1.19 0 0 0 30 27.809V22.5Z"/><path fill="#21a366" d="M19.581 3H9.705a1.19 1.19 0 0 0-1.193 1.191V9.5L19.581 16l5.861 1.95L30 16V9.5Z"/><path fill="#107c41" d="M8.512 9.5h11.069V16H8.512Z"/><path d="M16.434 8.2H8.512v16.25h7.922a1.2 1.2 0 0 0 1.194-1.191V9.391A1.2 1.2 0 0 0 16.434 8.2" opacity=".1"/><path d="M15.783 8.85H8.512V25.1h7.271a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2"/><path d="M15.783 8.85H8.512V23.8h7.271a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2"/><path d="M15.132 8.85h-6.62V23.8h6.62a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2"/><path fill="url(#logoExcel0)" d="M3.194 8.85h11.938a1.193 1.193 0 0 1 1.194 1.191v11.918a1.193 1.193 0 0 1-1.194 1.191H3.194A1.19 1.19 0 0 1 2 21.959V10.041A1.19 1.19 0 0 1 3.194 8.85"/><path fill="#fff" d="m5.7 19.873l2.511-3.884l-2.3-3.862h1.847L9.013 14.6c.116.234.2.408.238.524h.017q.123-.281.26-.546l1.342-2.447h1.7l-2.359 3.84l2.419 3.905h-1.809l-1.45-2.711A2.4 2.4 0 0 1 9.2 16.8h-.024a1.7 1.7 0 0 1-.168.351l-1.493 2.722Z"/><path fill="#33c481" d="M28.806 3h-9.225v6.5H30V4.191A1.19 1.19 0 0 0 28.806 3"/><path fill="#107c41" d="M19.581 16H30v6.5H19.581Z"/></svg></span><span>Excel <span class="skill-group__detail">TCD, automatisation, analyse, <svg class="vba-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9.5l3-2.5 3 2.5-3 2.5zM17 9.5l3-2.5 3 2.5-3 2.5zM13 6l3-2.5L19 6l-3 2.5z"/><rect x="3" y="13" width="26" height="15" rx="2.5"/><text x="16" y="24.5" text-anchor="middle">VBA</text></svg>notions de VBA</span></span></li>
               <li data-reveal><span class="skill-logo" aria-hidden="true"><svg class="skill-logo__img skill-logo__img--wide" focusable="false" viewBox="0 4.8 24 14.4"><path fill="#00D639" d="M2.702 5.316C1.167 5.316 0 6.48 0 7.972c0 1.635 1.167 2.267 2.46 2.655c1.224.387 1.804.818 1.804 1.666c0 .86-.64 1.465-1.477 1.465c-.84 0-1.566-.604-1.566-1.535c0-.516.242-.647.242-.934c0-.33-.227-.574-.599-.574c-.423 0-.864.647-.864 1.566c0 1.48 1.266 2.57 2.787 2.57c1.535 0 2.701-1.163 2.701-2.656c0-1.623-1.166-2.267-2.472-2.655c-1.209-.372-1.792-.818-1.792-1.666c0-.845.626-1.45 1.463-1.45c.867 0 1.565.617 1.577 1.465c.016.388.285.617.599.617a.592.592 0 0 0 .61-.647c-.027-1.48-1.263-2.543-2.771-2.543m6.171 9.52c.683 0 1.21-.23 1.21-.69a.57.57 0 0 0-.557-.574c-.2 0-.341.085-.668.085c-.882 0-1.577-.76-1.577-1.65c0-.962.71-1.725 1.608-1.725c1.009 0 1.65.775 1.65 1.895v2.054c0 .36.284.604.625.604c.327 0 .61-.244.61-.604v-2.097c0-1.72-1.178-2.984-2.858-2.984c-1.566 0-2.86 1.22-2.86 2.856c0 1.58 1.282 2.83 2.817 2.83m6.257 3.848c1.535 0 2.701-1.163 2.701-2.656c0-1.635-1.166-2.267-2.472-2.655c-1.209-.387-1.792-.818-1.792-1.666s.64-1.465 1.463-1.465c.84 0 1.577.604 1.577 1.535c0 .519-.241.647-.241.934c0 .33.226.574.583.574c.441 0 .882-.647.882-1.566c0-1.48-1.278-2.57-2.801-2.57c-1.535 0-2.687 1.163-2.687 2.656c0 1.623 1.152 2.267 2.46 2.655c1.224.372 1.804.818 1.804 1.666c0 .86-.64 1.45-1.462 1.45c-.883 0-1.566-.601-1.578-1.465c-.015-.388-.3-.604-.598-.604c-.327 0-.626.216-.61.631c.011 1.499 1.247 2.546 2.77 2.546zm6.171-3.849c.795 0 1.424-.229 1.862-.503c.426-.272.595-.504.595-.76c0-.272-.2-.516-.568-.516c-.441 0-.795.66-1.877.66c-.952 0-1.707-.76-1.707-1.722c0-.95.725-1.724 1.635-1.724c.982 0 1.508.647 1.508 1.062c0 .116-.085.174-.2.174h-1.194c-.326 0-.568.216-.568.503c0 .314.242.546.568.546h1.636c.625 0 1.009-.33 1.009-.89c0-1.408-1.194-2.512-2.774-2.512c-1.566 0-2.83 1.263-2.83 2.84s1.312 2.842 2.905 2.842"/></svg></span>Sage Comptabilité</li>
-              <li data-reveal><span class="skill-logo" aria-hidden="true"><svg class="skill-logo__img" focusable="false" viewBox="0 0 24 24"><rect x="3" y="14.5" width="3.2" height="6.5" rx=".6" fill="#F2545B"/><rect x="7.6" y="10.5" width="3.2" height="10.5" rx=".6" fill="#38B6FF"/><rect x="12.2" y="13" width="3.2" height="8" rx=".6" fill="#F5C542"/><rect x="16.8" y="7.5" width="3.2" height="13.5" rx=".6" fill="#3FBF8A"/><path d="M2 21.4h20" stroke="#A6B1C2" stroke-width="1.2" stroke-linecap="round"/><path d="M4.6 10.4l4.6-4.2 4.6 2.6 4.6-5.4" fill="none" stroke="#ECEFF4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4.6" cy="10.4" r="1.35" fill="#ECEFF4"/><circle cx="9.2" cy="6.2" r="1.35" fill="#F5C542"/><circle cx="13.8" cy="8.8" r="1.35" fill="#ECEFF4"/><circle cx="18.4" cy="3.4" r="1.35" fill="#F5C542"/></svg></span>Statistiques, Probabilités &amp; Mathématiques</li>
+              <li data-reveal><span class="skill-logo" aria-hidden="true"><svg class="skill-logo__img" focusable="false" viewBox="0 0 24 24"><rect x="3" y="14.5" width="3.2" height="6.5" rx=".6" fill="#F2545B"/><rect x="7.6" y="10.5" width="3.2" height="10.5" rx=".6" fill="#38B6FF"/><rect x="12.2" y="13" width="3.2" height="8" rx=".6" fill="#F5C542"/><rect x="16.8" y="7.5" width="3.2" height="13.5" rx=".6" fill="#3FBF8A"/><path d="M2 21.4h20" stroke="#A6B1C2" stroke-width="1.2" stroke-linecap="round"/><path d="M4.6 10.4l4.6-4.2 4.6 2.6 4.6-5.4" fill="none" stroke="#ECEFF4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4.6" cy="10.4" r="1.35" fill="#ECEFF4"/><circle cx="9.2" cy="6.2" r="1.35" fill="#F5C542"/><circle cx="13.8" cy="8.8" r="1.35" fill="#ECEFF4"/><circle cx="18.4" cy="3.4" r="1.35" fill="#F5C542"/></svg></span><span>Statistiques &amp; probabilités <span class="skill-group__detail">Fondamentaux en cours d'apprentissage au BUT SD</span></span></li>
             </ul>
           </li>
         </ul>
@@ -287,7 +326,9 @@
          ============================================================ -->
     <section class="section section--a-propos" id="a-propos" aria-labelledby="a-propos-titre">
       <div class="container">
-        <h2 id="a-propos-titre" class="section-title" data-reveal><span class="section-number" aria-hidden="true">04</span>À propos et contact</h2>
+        <h2 id="a-propos-titre" class="section-title" data-reveal><span class="section-number" aria-hidden="true">03</span>À propos et contact</h2>
+
+        <p class="about__text" data-reveal>En dehors des données&nbsp;: Jiu-Jitsu Brésilien en club depuis 2023 (ceinture bleue, tournois officiels), voyages, et une e-boutique de maroquinerie lancée en 2026 (3 à 4&nbsp;K€ de chiffre d'affaires).</p>
 
         <h3 class="subsection-title" id="centres-interet" data-reveal>Centres d'intérêt</h3>
         <!-- Chaque carte ouvre la page du centre d'intérêt, générée par centres_interet.py -->
@@ -335,7 +376,7 @@
                   <p class="project-card__kicker">Centre d'intérêt 03 · Entrepreneuriat</p>
                 </div>
                 <h4 class="project-card__title"><a class="project-card__link" href="centres-interet/e-commerce.html">E-commerce &amp; Sourcing</a></h4>
-                <p class="project-card__summary">Expérience en e-commerce et sourcing international&nbsp;: un esprit entrepreneurial et un sens aiguisé de l'optimisation.</p>
+                <p class="project-card__summary">Création d'une e-boutique de maroquinerie, avec sourcing au Japon et analyse des prix et des marges.</p>
                 <span class="project-card__cta" aria-hidden="true">Découvrir <svg class="icon"><use href="#i-arrow-right"/></svg></span>
               </div>
             </article>
