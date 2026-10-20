@@ -96,6 +96,20 @@
     observer.observe(element);
   });
 
+  /* Journal de contrôle qualité : les lignes s'affichent une à une, une seule
+     fois, quand le panneau est bien visible (voir .log.is-run dans le CSS). */
+  const journal = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      journal.unobserve(entry.target);
+      entry.target.classList.add('is-run');
+    });
+  }, { threshold: 0.35 });
+
+  document.querySelectorAll('[data-log]').forEach(function (element) {
+    journal.observe(element);
+  });
+
   // Signale au filet de sécurité du <head> que les apparitions sont prises en charge
   root.classList.add('reveal-ready');
 })();

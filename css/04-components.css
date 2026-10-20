@@ -123,15 +123,375 @@
   }
 }
 
-/* --- Bannière du hero (reprise de LinkedIn) ------------------------------ */
-.banner-img {
+/* --- Signature du hero : la bannière LinkedIn, recréée en HTML ----------- */
+/* Panneau bleu marine, logos des outils, carte blanche avec le nom (h1),
+   portrait, sous-titre espacé et annotation manuscrite vers les projets. */
+.signature {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-3) var(--space-5);
+  background-color: var(--color-navy);
+  background-image:
+    radial-gradient(ellipse 70% 90% at 50% 0%, rgba(141, 180, 232, 0.16), transparent 70%),
+    repeating-linear-gradient(to right, var(--color-grid) 0, var(--color-grid) 1px, transparent 1px, transparent var(--grid-step));
+  border: 1px solid var(--color-border-strong);
+  border-radius: 20px;
+  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.8);
+}
+
+.signature__tools {
+  display: flex;
+  gap: var(--space-3);
+  justify-self: start;
+  padding: 0;
+  list-style: none;
+}
+
+.signature__tools svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+/* VBA au trait, comme sur la bannière */
+.signature__vba {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.signature__vba text {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  fill: var(--color-text);
+  stroke: none;
+}
+
+.signature__card {
+  position: relative;
   width: 100%;
-  height: auto;
-  aspect-ratio: 1584 / 396;
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+  background-color: var(--color-paper);
+  border-radius: 14px;
+  box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.65);
+}
+
+/* Le nom en capitales très espacées. padding-left compense l'espace laissé
+   après la dernière lettre, pour que le nom reste centré. */
+.signature__name {
+  padding-left: 0.28em;
+  font-size: clamp(1.75rem, 5vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--color-bg);
+}
+
+/* Portrait : posé sur le coin bas gauche de la carte */
+.signature__photo {
+  position: absolute;
+  bottom: -28px;
+  left: var(--space-2);
+  width: 56px;
+  height: 56px;
   object-fit: cover;
+  border: 3px solid var(--color-navy);
+  border-radius: 50%;
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+.signature__role {
+  max-width: none;
+  margin-top: var(--space-3); /* laisse passer le portrait sur mobile */
+  padding-left: 0.3em;
+  font-size: var(--text-label-sm);
+  font-weight: 500;
+  line-height: 1.8;
+  letter-spacing: 0.3em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+/* Annotation manuscrite : desktop uniquement, dans la marge droite de la carte */
+.signature__note {
+  display: none;
+}
+
+@media (min-width: 48em) {
+  .signature {
+    padding: var(--space-5) var(--space-5) var(--space-6);
+  }
+
+  .signature__card {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .signature__photo {
+    bottom: -36px;
+    left: -40px;
+    width: 104px;
+    height: 104px;
+    border-width: 4px;
+  }
+
+  .signature__role {
+    margin-top: 0;
+    font-size: var(--text-label);
+  }
+}
+
+@media (min-width: 64em) {
+  .signature__card {
+    width: 76%;
+  }
+
+  .signature__note {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-family: var(--font-hand);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .signature__note svg {
+    width: 2.5rem;
+    height: 3.5rem;
+    margin: var(--space-1) var(--space-5) 0 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform var(--duration-hover) var(--ease);
+  }
+
+  .signature__note:hover {
+    color: var(--color-accent);
+  }
+
+  .signature__note:hover svg {
+    transform: translateY(3px);
+  }
+}
+
+/* Moment fort du chargement (le seul de la page) : la carte se pose, le nom
+   s'ouvre depuis le centre, le portrait et les logos arrivent, la flèche se dessine. */
+@media (prefers-reduced-motion: no-preference) {
+  .signature__card {
+    animation: signature-card 900ms var(--ease-out) 100ms both;
+  }
+
+  .signature__name {
+    animation: signature-name 900ms var(--ease-out) 300ms both;
+  }
+
+  .signature__photo {
+    animation: signature-pop 500ms var(--ease-out) 700ms both;
+  }
+
+  .signature__role,
+  .signature__tools li {
+    animation: signature-rise 600ms var(--ease-out) 650ms both;
+  }
+
+  .signature__tools li:nth-child(1) { animation-delay: 250ms; }
+  .signature__tools li:nth-child(2) { animation-delay: 320ms; }
+  .signature__tools li:nth-child(3) { animation-delay: 390ms; }
+  .signature__tools li:nth-child(4) { animation-delay: 460ms; }
+
+  .signature__note span {
+    animation: signature-rise 500ms var(--ease-out) 950ms both;
+  }
+
+  .signature__note path {
+    stroke-dasharray: 1;
+    animation: signature-draw 650ms ease-in-out 1150ms both;
+  }
+}
+
+@keyframes signature-card {
+  from { opacity: 0; transform: translateY(24px) rotate(-1.5deg) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes signature-name {
+  from { opacity: 0; clip-path: inset(0 50%); }
+  to { opacity: 1; clip-path: inset(0 0); }
+}
+
+@keyframes signature-pop {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes signature-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes signature-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* --- Fil rouge : journal de contrôle qualité ------------------------------ */
+.audit__title {
+  max-width: 14ch;
+  text-wrap: balance;
+}
+
+.audit__lead {
+  max-width: 44ch;
+  margin-top: var(--space-4);
+  color: var(--color-muted);
+}
+
+.log {
+  overflow: hidden;
+  background-color: var(--color-terminal);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-md);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
+}
+
+.log__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 10px var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-label-sm);
+  color: var(--color-muted);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.log__dots {
+  display: flex;
+  gap: 6px;
+}
+
+.log__dots i {
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-border-strong);
+  border-radius: 50%;
+}
+
+.log__lines {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-3);
+  list-style: none;
+}
+
+.log__line {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: var(--space-3);
+  max-width: none;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.log__line:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.log__status {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.1em;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  border: 1px solid;
+  border-radius: 6px;
+}
+
+.log__status--ok {
+  color: var(--color-ok);
+  background-color: rgba(63, 191, 138, 0.12);
+}
+
+.log__status--warn {
+  color: var(--color-warning);
+  background-color: rgba(227, 185, 138, 0.1);
+}
+
+.log__check {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.log__fix {
+  margin-top: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.log__fix::before {
+  content: "→ ";
+  color: var(--color-blue);
+}
+
+.log__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  margin-top: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-label-sm);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+@media (min-width: 48em) {
+  .log__lines {
+    padding: var(--space-5) var(--space-4);
+  }
+}
+
+/* Les contrôles « s'exécutent » un par un quand le journal entre dans l'écran
+   (main.js ajoute .is-run). Mouvement réduit ou sans JS : tout est affiché. */
+.reveal-on .log:not(.is-run) .log__line {
+  opacity: 0;
+}
+
+.reveal-on .log.is-run .log__line {
+  animation: log-line 520ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 450ms + 200ms);
+}
+
+.reveal-on .log.is-run .log__status {
+  animation: signature-pop 400ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 450ms + 450ms);
+}
+
+@keyframes log-line {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); }
 }
 
 /* --- Cartes projets : chaque carte ouvre la page du projet --------------- */
