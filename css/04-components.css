@@ -71,58 +71,6 @@
   }
 }
 
-/* --- Bloc « rapport » (signature du hero) -------------------------------- */
-/* <dl class="hero__report report"> avec des <div class="report__row"> */
-.report {
-  display: grid;
-  grid-template-columns: 1fr;
-  border-top: 1px solid var(--color-border);
-  font-family: var(--font-mono);
-}
-
-.report__row {
-  display: flex;
-  flex-direction: column-reverse; /* valeur en grand au-dessus, étiquette dessous */
-  justify-content: flex-end;      /* valeurs alignées en haut quand les étiquettes passent sur 2 lignes */
-  gap: var(--space-1);
-  padding: var(--space-3) 0;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.report__label {
-  font-size: var(--text-label-sm);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--color-muted);
-}
-
-.report__value {
-  margin: 0;
-  font-size: 1.75rem;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--color-text);
-}
-
-/* Tablette : les trois faits côte à côte, sous le titre */
-@media (min-width: 48em) and (max-width: 63.99em) {
-  .report {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .report__row {
-    padding-inline: var(--space-3);
-    border-bottom: 0;
-    border-left: 1px solid var(--color-border);
-  }
-
-  .report__row:first-child {
-    padding-left: 0;
-    border-left: 0;
-  }
-}
-
 /* --- Signature du hero : la bannière LinkedIn, recréée en HTML ----------- */
 /* Panneau bleu marine, logos des outils, carte blanche avec le nom (h1),
    portrait, sous-titre espacé et annotation manuscrite vers les projets. */
@@ -165,7 +113,7 @@
 .signature__vba text {
   font-family: var(--font-mono);
   font-size: 8px;
-  font-weight: 700;
+  font-weight: 400; /* seule graisse chargée : pas de faux gras */
   fill: var(--color-text);
   stroke: none;
 }
@@ -234,16 +182,16 @@
     padding: var(--space-6) var(--space-5);
   }
 
+  /* Tablette : le portrait déborde à gauche sans sortir du panneau */
   .signature__photo {
     bottom: -36px;
-    left: -40px;
+    left: calc(-1 * var(--space-4));
     width: 104px;
     height: 104px;
     border-width: 4px;
   }
 
   .signature__role {
-    margin-top: 0;
     font-size: var(--text-label);
   }
 }
@@ -251,6 +199,16 @@
 @media (min-width: 64em) {
   .signature__card {
     width: 76%;
+  }
+
+  /* Desktop : la carte est plus étroite, le portrait peut déborder davantage
+     et le sous-titre remonter sans le toucher */
+  .signature__photo {
+    left: -40px;
+  }
+
+  .signature__role {
+    margin-top: 0;
   }
 
   .signature__note {
@@ -280,11 +238,16 @@
     transition: transform var(--duration-hover) var(--ease);
   }
 
-  .signature__note:hover {
-    color: var(--color-accent);
+  /* Survol et focus clavier : soulignement (pas d'orange sur le bleu marine, voir 01-tokens.css) */
+  .signature__note:hover span,
+  .signature__note:focus-visible span {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.15em;
   }
 
-  .signature__note:hover svg {
+  .signature__note:hover svg,
+  .signature__note:focus-visible svg {
     transform: translateY(3px);
   }
 }
@@ -296,8 +259,9 @@
     animation: signature-card 900ms var(--ease-out) 100ms both;
   }
 
+  /* backwards : masqué pendant le délai, aucun clip-path résiduel après l'animation */
   .signature__name {
-    animation: signature-name 900ms var(--ease-out) 300ms both;
+    animation: signature-name 900ms var(--ease-out) 300ms backwards;
   }
 
   .signature__photo {
@@ -329,9 +293,10 @@
   to { opacity: 1; transform: none; }
 }
 
+/* Sans opacité : le h1 reste candidat au LCP dès le premier affichage */
 @keyframes signature-name {
-  from { opacity: 0; clip-path: inset(0 50%); }
-  to { opacity: 1; clip-path: inset(0 0); }
+  from { clip-path: inset(0 50%); }
+  to { clip-path: inset(0 0); }
 }
 
 @keyframes signature-pop {
@@ -349,15 +314,15 @@
   to { stroke-dashoffset: 0; }
 }
 
-/* --- Fil rouge : journal de contrôle qualité ------------------------------ */
+/* --- Fil rouge : journal de contrôle qualité (colonne droite du hero) ------ */
 .audit__title {
-  max-width: 14ch;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
   text-wrap: balance;
 }
 
 .audit__lead {
   max-width: 44ch;
-  margin-top: var(--space-4);
+  margin-block: var(--space-2) var(--space-4);
   color: var(--color-muted);
 }
 
@@ -453,13 +418,14 @@
 
 .log__fix::before {
   content: "→ ";
+  content: "→ " / ""; /* flèche décorative, non lue par les lecteurs d'écran */
   color: var(--color-blue);
 }
 
 .log__link {
   display: inline-flex;
   align-items: center;
-  min-height: 2rem;
+  min-height: var(--tap-target);
   margin-top: var(--space-1);
   font-family: var(--font-mono);
   font-size: var(--text-label-sm);
@@ -479,13 +445,14 @@
   opacity: 0;
 }
 
+/* backwards : aucun clip-path résiduel qui couperait le contour de focus des liens */
 .reveal-on .log.is-run .log__line {
-  animation: log-line 520ms var(--ease-out) both;
+  animation: log-line 520ms var(--ease-out) backwards;
   animation-delay: calc(var(--i, 0) * 450ms + 200ms);
 }
 
 .reveal-on .log.is-run .log__status {
-  animation: signature-pop 400ms var(--ease-out) both;
+  animation: signature-pop 400ms var(--ease-out) backwards;
   animation-delay: calc(var(--i, 0) * 450ms + 450ms);
 }
 
@@ -961,6 +928,13 @@
   }
 }
 
+/* --- À propos : présentation courte avant les centres d'intérêt ------------ */
+.about__text {
+  max-width: 60ch;
+  font-size: 1.125rem;
+  color: var(--color-text);
+}
+
 /* --- Contact ------------------------------------------------------------- */
 .contact {
   margin-top: var(--space-6);
@@ -1112,6 +1086,7 @@
 
 /* Hero : recherche de stage, sous l'accroche */
 .hero__goal {
+  margin-top: var(--space-4);
   color: var(--color-muted);
 }
 
@@ -1210,7 +1185,8 @@
 }
 
 @media print {
-  .reveal-on [data-reveal]:not(.is-visible) {
+  .reveal-on [data-reveal]:not(.is-visible),
+  .reveal-on .log:not(.is-run) .log__line {
     opacity: 1;
     transform: none;
   }

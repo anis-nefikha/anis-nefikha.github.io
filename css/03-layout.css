@@ -185,7 +185,6 @@
 }
 
 /* Ligne d'en-tête : numéro mono accent + titre, puis filet 1px pleine largeur */
-.section-head,
 .section-title {
   display: flex;
   align-items: baseline;
@@ -193,16 +192,6 @@
   padding-bottom: var(--space-4);
   margin-bottom: var(--space-6);
   border-bottom: 1px solid var(--color-border);
-}
-
-/* Le titre « 01 Accueil » est une étiquette : le grand titre du hero est le h1 */
-.section-head {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--color-muted);
-  max-width: none;
 }
 
 .section-number {
@@ -243,24 +232,14 @@
   row-gap: var(--space-6);
 }
 
-.hero__grid .section-head {
-  margin-bottom: var(--space-4);
-}
-
 /* La signature est suivie du texte : un peu plus d'air que le gap de la grille */
 .hero__grid > .signature {
   margin-bottom: var(--space-3);
 }
 
-/* --- Fil rouge : contrôle qualité ------------------------------------------ */
-.audit {
-  background-color: var(--color-bg-deep);
-  border-block: 1px solid var(--color-border);
-}
-
-.audit__grid {
-  row-gap: var(--space-5);
-  align-items: center;
+/* Mobile et tablette : le journal qualité passe sous les boutons */
+.hero__audit {
+  margin-top: var(--space-5);
 }
 
 /* --- Pages projets -------------------------------------------------------- */
@@ -327,8 +306,9 @@
     padding-block: var(--space-8);
   }
 
+  /* Haut réduit : le journal qualité du hero reste au-dessus de la ligne de flottaison */
   .section--accueil {
-    padding-block: var(--space-7) var(--space-8);
+    padding-block: var(--space-6) var(--space-8);
   }
 
   .project-list > li {
@@ -367,30 +347,16 @@
     grid-row: 1;
   }
 
-  /* Hero : titre pleine largeur, texte à gauche, bloc « rapport » à droite */
-  .hero__grid > * {
-    grid-column: 1 / 8;
-  }
-
-  .hero__grid > .section-head,
-  .hero__grid > .signature {
-    grid-column: 1 / -1;
-  }
-
-  /* Rangées : 1 en-tête, 2 signature, 3 accroche, 4 objectif, 5 boutons */
-  .hero__grid > .hero__report {
-    grid-column: 9 / -1;
-    grid-row: 3 / span 3;
+  /* Hero : signature pleine largeur, texte à gauche, journal qualité à droite
+     (sous la flèche « Ma méthode », visible sans défiler) */
+  .hero__grid > .hero__text {
+    grid-column: 1 / 6;
     align-self: start;
   }
 
-  /* Fil rouge : titre à gauche, journal à droite */
-  .audit__grid > .audit__intro {
-    grid-column: 1 / 6;
-  }
-
-  .audit__grid > .log {
-    grid-column: 6 / -1;
+  .hero__grid > .hero__audit {
+    grid-column: 7 / -1;
+    margin-top: 0;
   }
 
   /* Compétences à gauche, timeline à droite */
