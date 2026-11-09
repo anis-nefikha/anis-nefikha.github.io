@@ -16,7 +16,6 @@ Science des Données (IUT de Lille), à la recherche d'un stage d'un mois en dat
 portfolio/
 ├── index.html               accueil, projets, compétences, à propos et contact
 ├── projets/
-│   ├── comparateur-carburants.html   README du projet Python
 │   └── dashboard-adidas.html         README du projet Excel
 ├── centres-interet/                  une page par centre d'intérêt (JJB, voyages, …)
 ├── css/

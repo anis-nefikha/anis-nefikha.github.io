@@ -139,12 +139,12 @@
           </div>
         </div>
 
-        <!-- Fil rouge : contrôle qualité (3 anomalies réelles, tirées des pages projets).
+        <!-- Fil rouge : contrôle qualité (2 anomalies réelles, tirées de la page projet Adidas).
              Placé dans le hero pour être vu sans défiler. Les lignes s'affichent une à une
              quand le journal entre dans l'écran (main.js). -->
         <div class="hero__audit" id="verification">
           <h2 class="audit__title" data-reveal>Je vérifie avant d'analyser.</h2>
-          <p class="audit__lead" data-reveal>Trois anomalies trouvées dans mes projets, et ce que j'en ai fait.</p>
+          <p class="audit__lead" data-reveal>Deux anomalies trouvées dans mon projet Excel, et ce que j'en ai fait.</p>
 
         <figure class="log" data-log>
           <figcaption class="log__bar"><span class="log__dots" aria-hidden="true"><i></i><i></i><i></i></span>controle_qualite.log</figcaption>
@@ -165,14 +165,6 @@
                 <a class="log__link" href="projets/dashboard-adidas.html#etape-5">Voir l'analyse</a>
               </div>
             </li>
-            <li class="log__line" style="--i: 2">
-              <span class="log__status log__status--warn" aria-hidden="true">!</span>
-              <div class="log__text">
-                <p class="log__check"><span class="visually-hidden">Signalé : </span>Prix des carburants datés de plus de 10 jours</p>
-                <p class="log__fix">Marqués douteux et séparés des prix fiables avant le classement</p>
-                <a class="log__link" href="projets/comparateur-carburants.html#etape-5">Voir le comparateur</a>
-              </div>
-            </li>
           </ol>
         </figure>
         </div>
@@ -188,51 +180,6 @@
 
         <!-- Chaque carte ouvre la page du projet (README complet), générée par projets.py -->
         <ul class="project-list grid">
-          <li data-reveal>
-            <article class="project-card">
-              <div class="project-card__cover" aria-hidden="true">
-                <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice" focusable="false">
-                  <defs>
-                    <linearGradient id="couvCarteFond" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1F3A5F"/><stop offset="1" stop-color="#0D1726"/></linearGradient>
-                    <pattern id="couvCarteGrille" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#8DB4E8" stroke-opacity=".09"/></pattern>
-                    <radialGradient id="couvCarteHalo"><stop offset="0" stop-color="#FF5A36" stop-opacity=".22"/><stop offset="1" stop-color="#FF5A36" stop-opacity="0"/></radialGradient>
-                  </defs>
-                  <rect width="320" height="140" fill="url(#couvCarteFond)"/>
-                  <rect width="320" height="140" fill="url(#couvCarteGrille)"/>
-                  <g fill="none" stroke="#8DB4E8" stroke-linecap="round">
-                    <path d="M-10 104C60 92 96 60 160 70s110-34 180-40" stroke-opacity=".22" stroke-width="6"/>
-                    <path d="M120-10c12 50 30 100 20 160" stroke-opacity=".16" stroke-width="4"/>
-                    <path d="M232 150c-8-40-36-62-72-80" stroke-opacity=".12" stroke-width="3"/>
-                  </g>
-                  <circle cx="160" cy="70" r="56" fill="url(#couvCarteHalo)" stroke="#8DB4E8" stroke-opacity=".45" stroke-dasharray="3 5"/>
-                  <g fill="#8DB4E8" fill-opacity=".6">
-                    <circle cx="112" cy="86" r="3"/><circle cx="200" cy="58" r="3"/><circle cx="150" cy="108" r="3"/><circle cx="208" cy="100" r="3"/>
-                    <circle cx="58" cy="40" r="3"/><circle cx="268" cy="104" r="3"/><circle cx="252" cy="36" r="3"/><circle cx="40" cy="112" r="3"/>
-                  </g>
-                  <g stroke="#E3B98A" stroke-width="1.5" stroke-linecap="round">
-                    <circle cx="126" cy="42" r="6.5" fill="#0A0F18"/>
-                    <path d="M126 39v3.5M126 45.2v.1"/>
-                  </g>
-                  <circle cx="160" cy="70" r="10" fill="#ECEFF4" fill-opacity=".14"/>
-                  <circle cx="160" cy="70" r="4" fill="#ECEFF4"/>
-                  <g font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle" fill="#0A0F18">
-                    <circle cx="186" cy="86" r="9.5" fill="#FF5A36"/><text x="186" y="89.3">1</text>
-                    <circle cx="132" cy="62" r="8" fill="#FF5A36"/><text x="132" y="65.3">2</text>
-                    <circle cx="180" cy="34" r="8" fill="#FF5A36"/><text x="180" y="37.3">3</text>
-                  </g>
-                </svg>
-              </div>
-              <div class="project-card__body">
-                <div class="project-card__head">
-                  <span class="project-logo" aria-hidden="true"><svg class="icon"><use href="#i-fuel"/></svg></span>
-                  <p class="project-card__kicker">Projet 01 · Python · pandas · API</p>
-                </div>
-                <h3 class="project-card__title"><a class="project-card__link" href="projets/comparateur-carburants.html">Comparateur de prix des carburants</a></h3>
-                <p class="project-card__summary">Outil Python qui trouve les stations-service les moins chères autour d'une ville, à partir des données ouvertes, et qui vérifie que les prix affichés sont encore à jour.</p>
-                <span class="project-card__cta" aria-hidden="true">Lire le README <svg class="icon"><use href="#i-arrow-right"/></svg></span>
-              </div>
-            </article>
-          </li>
           <li data-reveal>
             <article class="project-card">
               <div class="project-card__cover" aria-hidden="true">
@@ -270,7 +217,7 @@
               <div class="project-card__body">
                 <div class="project-card__head">
                   <span class="project-logo" aria-hidden="true"><svg class="icon"><use href="#i-dashboard"/></svg></span>
-                  <p class="project-card__kicker">Projet 02 · Excel · TCD · Dashboard</p>
+                  <p class="project-card__kicker">Projet 01 · Excel · TCD · Dashboard</p>
                 </div>
                 <h3 class="project-card__title"><a class="project-card__link" href="projets/dashboard-adidas.html">Analyse des ventes Adidas aux États-Unis</a></h3>
                 <p class="project-card__summary">Tableau de bord interactif construit dans Excel à partir de 9&nbsp;648 ventes Adidas aux États-Unis, avec un audit de la qualité des données avant toute analyse.</p>
